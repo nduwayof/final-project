@@ -41,23 +41,6 @@ mongoose.connect('mongodb://mongodb:27017/favorites', err => {
 
 const run = async () => {
 
-
-  const u = {
-    name: 'Caio',
-    id: '12345',
-    email: 'caio@mum.edu',
-    password: '123',
-    phone: '1561654564'
-
-  };
-  await producer.connect();
-  // await producer.send({
-  //   topic: 'user',
-  //   messages: [{
-  //     value: JSON.stringify(u)
-  //   }],
-  // });
-
   // Consuming
   await consumer.connect()
   await consumer.subscribe({ topic: 'user' });
