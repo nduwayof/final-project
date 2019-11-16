@@ -5,7 +5,7 @@ const Order = require('../models/order');
 
 const route = express.Router();
 const kafka = new Kafka({
-    clientId: 'favorites',
+    clientId: 'orderSvc',
     brokers: ['my-kafka:9092']
 });
 const producer = kafka.producer();
