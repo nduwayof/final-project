@@ -1,6 +1,6 @@
 package edu.mum.cs.restaurants.services;
 
-import edu.mum.cs.restaurants.models.Restaurant;
+import edu.mum.cs.restaurants.models.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -37,4 +37,50 @@ public interface IRestaurantQueryService {
      * @return the list
      */
     List<Restaurant> findAllRestaurants();
+
+    /**
+     * Find restaurant menus by restaurant id list.
+     *
+     * @param restaurantId the restaurant id
+     *
+     * @return the list
+     */
+    List<RestaurantMenu> findRestaurantMenusByRestaurantId(final UUID restaurantId);
+
+    /**
+     * Find restaurant menu by id restaurant menu.
+     *
+     * @param restaurantMenuId the restaurant menu id
+     *
+     * @return the restaurant menu
+     */
+    RestaurantMenu findRestaurantMenuById(final UUID restaurantMenuId);
+
+    /**
+     * Find restaurant addresses by restaurant id list.
+     *
+     * @param restaurantId the restaurant id
+     *
+     * @return the list
+     */
+    List<RestaurantAddress> findRestaurantAddressesByRestaurantId(final UUID restaurantId);
+
+    /**
+     * Find restaurant schedule by restaurant id list.
+     *
+     * @param restaurantId the restaurant id
+     *
+     * @return the list
+     */
+    List<RestaurantSchedule> findRestaurantScheduleByRestaurantId(final UUID restaurantId);
+
+    /**
+     * Find restaurant schedule by restaurant id and day restaurant schedule.
+     *
+     * @param restaurantId the restaurant id
+     * @param weekDay      the week day
+     *
+     * @return the restaurant schedule
+     */
+    RestaurantSchedule findRestaurantScheduleByRestaurantIdAndDay(final UUID restaurantId, final EWeekDay weekDay);
 }

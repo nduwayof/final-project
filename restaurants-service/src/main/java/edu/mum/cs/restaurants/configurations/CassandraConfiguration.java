@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * The type Cassandra configuration.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */

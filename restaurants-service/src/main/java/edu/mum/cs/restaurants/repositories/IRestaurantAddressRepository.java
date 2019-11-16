@@ -10,10 +10,19 @@ import java.util.UUID;
 
 /**
  * The interface Restaurant address repository.
+ * @author nduwayofabrice
+ * @version 1.0
  */
 @Repository
 public interface IRestaurantAddressRepository extends CrudRepository<RestaurantAddress, UUID> {
 
+    /**
+     * Find by restaurant id list.
+     *
+     * @param restaurantId the restaurant id
+     *
+     * @return the list
+     */
     @AllowFiltering
     List<RestaurantAddress> findByRestaurantId(final UUID restaurantId);
 }

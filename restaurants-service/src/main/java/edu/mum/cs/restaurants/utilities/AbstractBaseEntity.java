@@ -8,6 +8,11 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * The type Abstract base entity.
+ * @author nduwayofabrice
+ * @version 1.0
+ */
 @Data
 public abstract class AbstractBaseEntity implements Serializable {
 
@@ -20,6 +25,9 @@ public abstract class AbstractBaseEntity implements Serializable {
             ordering = Ordering.DESCENDING)
     private UUID id;
 
+    /**
+     * Instantiates a new Abstract base entity.
+     */
     protected AbstractBaseEntity() {
         this.id = UUID.randomUUID();
     }
