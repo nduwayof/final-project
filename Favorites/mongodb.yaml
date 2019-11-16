@@ -1,0 +1,3 @@
+usePassword : false
+replicaSet.enabled: true
+replicaSet.name: rs0-fav

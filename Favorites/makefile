@@ -20,3 +20,9 @@ k8s-expose-delete:
 	kubectl delete service favorites-deployment
 
 k8s-reset : k8s-deployment-delete k8s-service-delete k8s-deployment-create k8s-service-create
+
+########		MongoDB Intallation 				####
+helm-mongo-create:
+	helm install mongodb-fav bitnami/mongodb -f mongodb.yaml
+helm-mongo-delete:
+	helm uninstall mongodb-fav
