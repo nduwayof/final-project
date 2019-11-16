@@ -19,4 +19,4 @@ k8s-expose-create:
 k8s-expose-delete:
 	kubectl delete service favorites-deployment
 
-k8s-reset : k8s-deployment-delete k8s-service-delete k8s-deployment-create k8s-service-delete
+k8s-reset : k8s-deployment-delete k8s-service-delete k8s-deployment-create k8s-service-create
