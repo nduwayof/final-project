@@ -9,8 +9,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,7 +39,6 @@ public class RestaurantController {
      * @return the response entity
      */
     @GetMapping
-    @Cacheable(value = "restaurants")
     @ApiOperation(value = "View a list of available restaurants", response = List.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -59,7 +56,6 @@ public class RestaurantController {
      * @return the response entity
      */
     @PostMapping
-    @CachePut(value = "restaurants", key = "#restaurant.id")
     @ApiOperation(value = "Post a new restaurant", response = Restaurant.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully posted a new restaurant"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
@@ -77,7 +73,6 @@ public class RestaurantController {
      * @return the restaurant by id
      */
     @GetMapping(value = "/{id}")
-    @Cacheable(value = "restaurant", key = "#id")
     @ApiOperation(value = "Retrieve a restaurant by id", response = Restaurant.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved a restaurant by id"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),

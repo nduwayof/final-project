@@ -11,6 +11,7 @@ import edu.mum.cs.restaurants.repositories.IRestaurantScheduleRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +37,7 @@ public class RestaurantService implements IRestaurantService {
 
     @Override
     @Transactional
+    @CachePut(value = "restaurants", key = "#restaurant")
     public Restaurant saveRestaurant(@NotNull final Restaurant restaurant) {
         Restaurant restaurantObj = null;
         if(restaurantPhoneValidation(restaurant.getPhoneNumber())) {

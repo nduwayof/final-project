@@ -7,6 +7,7 @@ import edu.mum.cs.restaurants.repositories.IRestaurantRepository;
 import edu.mum.cs.restaurants.repositories.IRestaurantScheduleRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
@@ -31,6 +32,7 @@ public class RestaurantQueryService implements IRestaurantQueryService{
 
 
     @Override
+    @Cacheable(value = "restaurant", key = "#id")
     public Restaurant findRestaurantById(@NotNull final UUID id) {
         Optional<Restaurant> restaurant = this.restaurantRepository.findById(id);
         Restaurant restaurantObj = restaurant.orElse(null);
@@ -41,6 +43,7 @@ public class RestaurantQueryService implements IRestaurantQueryService{
     }
 
     @Override
+    @Cacheable(value = "restaurant", key = "#phoneNumber")
     public Restaurant findRestaurantByPhoneNumber(String phoneNumber) {
         Restaurant restaurantObj = this.restaurantRepository.findByPhoneNumber(phoneNumber);
        fetchRestaurant(restaurantObj);
@@ -48,8 +51,9 @@ public class RestaurantQueryService implements IRestaurantQueryService{
     }
 
     @Override
+    @Cacheable(value = "restaurants")
     public List<Restaurant> findAllRestaurants() {
-        List<Restaurant> restaurants =(List<Restaurant>) restaurantRepository.findAll();
+        List<Restaurant> restaurants = (List<Restaurant>) restaurantRepository.findAll();
         for(Restaurant restaurantObj : restaurants){
             fetchRestaurant(restaurantObj);
         }
@@ -57,6 +61,7 @@ public class RestaurantQueryService implements IRestaurantQueryService{
     }
 
     @Override
+    @Cacheable(value = "restaurant_menus", key = "#restaurantId")
     public List<RestaurantMenu> findRestaurantMenusByRestaurantId(@NotNull final UUID restaurantId) {
         return this.restaurantMenuRepository.findByRestaurantId(restaurantId);
     }

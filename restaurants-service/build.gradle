@@ -34,9 +34,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-   /* implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
-    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'*/
+    /* implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
+     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+     implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'*/
     implementation 'org.springframework.kafka:spring-kafka'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -46,10 +46,10 @@ dependencies {
     }
     testImplementation 'org.springframework.kafka:spring-kafka-test'
     compile group: 'com.codahale.metrics', name: 'metrics-core', version: '3.0.2'
-    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
-    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
-    compile group: 'io.springfox', name: 'springfox-bean-validators', version: '2.8.0'
-    compile group: 'javax.xml', name: 'jaxb-api', version: '2.1'
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-data-rest', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    compile group: 'org.springframework.plugin', name: 'spring-plugin-core', version: '1.2.0.RELEASE'
 }
 
 dependencyManagement {
