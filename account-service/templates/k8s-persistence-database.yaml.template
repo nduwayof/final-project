@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${serviceName}-db
+spec:
+  ports:
+    - protocol: TCP
+      port: ${serviceDBPort}
+      targetPort: ${serviceName}-db-port
+  selector:
+    app: ${serviceName}-db
+    tier: db
+  clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${serviceName}-db
+spec:
+  selector:
+    matchLabels:
+      app: ${serviceName}-db
+      tier: db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ${serviceName}-db
+        tier: db
+    spec:
+      containers:
+        - image: mysql:5.6
+          name: ${serviceName}-db
+          env:
+            # Use secret in real usage
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ${serviceName}-secrets
+                  key: mysql-root-password
+          ports:
+            - containerPort: 3306
+              name: ${serviceName}-db-port
+          volumeMounts:
+            - name: ${serviceName}-db-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: ${serviceName}-db-persistent-storage
+          persistentVolumeClaim:
+            claimName: ${serviceName}-pv-claim

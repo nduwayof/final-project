@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${serviceName}-deployment
+  labels:
+    app: ${serviceName}
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ${serviceName}
+  template:
+    metadata:
+      labels:
+        app: ${serviceName}
+
+    spec:
+      containers:
+        - name: ${serviceName}
+          image: ${serviceImage}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KEY1
+              valueFrom:
+                configMapKeyRef:
+                  name: ${serviceName}-config
+                  key: someKey1
+            - name: NEXT_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: ${serviceName}-config
+                  key: nextService
+            - name: SERVICE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ${serviceName}-secrets
+                  key: service-api-key
+            #MYSQL
+            - name: MYSQL_HOST
+              value: ${serviceName}-db
+
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PORT
+              value: "${serviceDBPort}"
+
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ${serviceName}-secrets
+                  key: mysql-root-password

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service2-deployment
+  labels:
+    app: account-service2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: account-service2
+  template:
+    metadata:
+      labels:
+        app: account-service2
+
+    spec:
+      containers:
+        - name: account-service2
+          image: widjesh/account-service2:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: KEY1
+              valueFrom:
+                configMapKeyRef:
+                  name: account-service2-config
+                  key: someKey1
+            - name: NEXT_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: account-service2-config
+                  key: nextService
+            - name: SERVICE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: account-service2-secrets
+                  key: service-api-key
+            #MYSQL
+            - name: MYSQL_HOST
+              value: account-service2-db
+
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PORT
+              value: "1"
+
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: account-service2-secrets
+                  key: mysql-root-password
