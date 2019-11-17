@@ -1,4 +1,4 @@
-package edu.mum.cs.deals.dealsservice;
+package edu.mum.cs.deals;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
