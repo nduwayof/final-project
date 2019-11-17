@@ -18,12 +18,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-mongoose.set('useCreateIndex', true);
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useUnifiedTopology', true);
-mongoose.set('useFindAndModify', false);
-
-mongoose.connect('mongodb://mongodb:27017/favorites', err => {
+mongoose.connect('mongodb+srv://favsys:SWKn6983lCHZKGFo@fav-soyyk.mongodb.net/favorites?retryWrites=true&w=majority', {
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useFindAndModify: false
+}, err => {
   if (!err) {
     console.log('connected !');
   } else {

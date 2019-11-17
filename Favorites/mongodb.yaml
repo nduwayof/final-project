@@ -1,3 +1,6 @@
-usePassword : false
-replicaSet.enabled: true
-replicaSet.name: rs0-fav
+mongodbRootPassword: secret
+mongodbUsername: favsys
+mongodbPassword: secret
+mongodbDatabase: favorites
+replicaSet:
+  enabled: true

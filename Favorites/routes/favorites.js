@@ -10,9 +10,13 @@ const kafka = new Kafka({
 });
 const producer = kafka.producer();
 
-route.get('/', async (req, res) => {
-    const favs = await Favorites.find({});
-    res.json(favs);
+route.get('/', async (req, res, next) => {
+    try {
+        const favs = await Favorites.find({});
+        res.json(favs);
+    } catch (err) {
+        next(err);
+    }
 });
 
 route.post('/', async (req, res) => {
