@@ -32,7 +32,6 @@ public class RestaurantQueryService implements IRestaurantQueryService{
 
 
     @Override
-    @Cacheable(value = "restaurant", key = "#id")
     public Restaurant findRestaurantById(@NotNull final UUID id) {
         Optional<Restaurant> restaurant = this.restaurantRepository.findById(id);
         Restaurant restaurantObj = restaurant.orElse(null);
@@ -43,7 +42,6 @@ public class RestaurantQueryService implements IRestaurantQueryService{
     }
 
     @Override
-    @Cacheable(value = "restaurant", key = "#phoneNumber")
     public Restaurant findRestaurantByPhoneNumber(String phoneNumber) {
         Restaurant restaurantObj = this.restaurantRepository.findByPhoneNumber(phoneNumber);
        fetchRestaurant(restaurantObj);
@@ -51,7 +49,6 @@ public class RestaurantQueryService implements IRestaurantQueryService{
     }
 
     @Override
-    @Cacheable(value = "restaurants")
     public List<Restaurant> findAllRestaurants() {
         List<Restaurant> restaurants = (List<Restaurant>) restaurantRepository.findAll();
         for(Restaurant restaurantObj : restaurants){
@@ -61,7 +58,6 @@ public class RestaurantQueryService implements IRestaurantQueryService{
     }
 
     @Override
-    @Cacheable(value = "restaurant_menus", key = "#restaurantId")
     public List<RestaurantMenu> findRestaurantMenusByRestaurantId(@NotNull final UUID restaurantId) {
         return this.restaurantMenuRepository.findByRestaurantId(restaurantId);
     }

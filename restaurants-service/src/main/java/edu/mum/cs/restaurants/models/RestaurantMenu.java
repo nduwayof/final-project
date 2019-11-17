@@ -10,6 +10,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -34,7 +35,7 @@ public class RestaurantMenu extends AbstractBaseEntity implements Serializable {
     private BigDecimal price;
 
     @Column(value = "MENU_TAGS")
-    private Set<String> menuTags;
+    private List<String> menuTags;
 
     @Column(value = "DELIVERY_TIME")
     private long deliveryTime;

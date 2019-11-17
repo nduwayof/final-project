@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,13 +41,14 @@ public class RestaurantController {
      * @return the response entity
      */
     @GetMapping
+    @Cacheable(value = "restaurants")
     @ApiOperation(value = "View a list of available restaurants", response = List.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public ResponseEntity<List<Restaurant>> getRestaurants() {
-        return new ResponseEntity<>(this.restaurantQueryService.findAllRestaurants(), HttpStatus.OK);
+    public List<Restaurant> getRestaurants() {
+        return this.restaurantQueryService.findAllRestaurants();
     }
 
     /**
@@ -56,13 +59,14 @@ public class RestaurantController {
      * @return the response entity
      */
     @PostMapping
+    @CachePut(value = "restaurants", key = "#restaurant")
     @ApiOperation(value = "Post a new restaurant", response = Restaurant.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully posted a new restaurant"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public ResponseEntity<Restaurant> postRestaurant(@RequestBody Restaurant restaurant) {
-        return new ResponseEntity<>(this.restaurantService.saveRestaurant(restaurant), HttpStatus.OK);
+    public Restaurant postRestaurant(@RequestBody Restaurant restaurant) {
+        return this.restaurantService.saveRestaurant(restaurant);
     }
 
     /**
@@ -73,13 +77,14 @@ public class RestaurantController {
      * @return the restaurant by id
      */
     @GetMapping(value = "/{id}")
+    @Cacheable(value = "restaurants", key = "#id")
     @ApiOperation(value = "Retrieve a restaurant by id", response = Restaurant.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved a restaurant by id"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public ResponseEntity<Restaurant> getRestaurantById(@PathVariable("id") UUID id) {
-        return new ResponseEntity<>(this.restaurantQueryService.findRestaurantById(id), HttpStatus.OK);
+    public Restaurant getRestaurantById(@PathVariable("id") UUID id) {
+        return this.restaurantQueryService.findRestaurantById(id);
     }
 
     /**
@@ -90,13 +95,14 @@ public class RestaurantController {
      * @return the restaurant by phone number
      */
     @GetMapping(value = "/phone/{phoneNumber}")
+    @Cacheable(value = "restaurants", key = "#phoneNumber")
     @ApiOperation(value = "Get restaurant by phone number", response = Restaurant.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved a restaurant by phone number"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public ResponseEntity<Restaurant> getRestaurantByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
-        return new ResponseEntity<>(this.restaurantQueryService.findRestaurantByPhoneNumber(phoneNumber), HttpStatus.OK);
+    public Restaurant getRestaurantByPhoneNumber(@PathVariable("phoneNumber") String phoneNumber) {
+        return this.restaurantQueryService.findRestaurantByPhoneNumber(phoneNumber);
     }
 
     /**
@@ -107,13 +113,14 @@ public class RestaurantController {
      * @return the response entity
      */
     @DeleteMapping(value = "/delete/{id}")
+    @Cacheable(value = "restaurants", key = "#id")
     @ApiOperation(value = "Delete an existing restaurant", response = Restaurant.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully deleted a restaurant by id"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public ResponseEntity<Restaurant> deleteRestaurant(@PathVariable("id") UUID id) {
-        return new ResponseEntity<>(this.restaurantService.deleteRestaurant(id), HttpStatus.OK);
+    public Restaurant deleteRestaurant(@PathVariable("id") UUID id) {
+        return this.restaurantService.deleteRestaurant(id);
     }
 
     /**
@@ -124,14 +131,14 @@ public class RestaurantController {
      * @return the restaurant menus
      */
     @GetMapping(value = "/menu/{restaurantId}")
-    @ApiOperation(value = "Retrieve menu by restaurant id", response = Restaurant.class)
+    @Cacheable(value = "restaurant_menus", key = "#id")
+    @ApiOperation(value = "Retrieve menu by restaurant id", response = List.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved menu by restaurant id"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public ResponseEntity<List<RestaurantMenu>> getRestaurantMenus(@PathVariable("restaurantId") UUID id) {
-        return new ResponseEntity<>(this.restaurantQueryService
-                .findRestaurantMenusByRestaurantId(id), HttpStatus.OK);
+    public List<RestaurantMenu> getRestaurantMenus(@PathVariable("restaurantId") UUID id) {
+        return this.restaurantQueryService.findRestaurantMenusByRestaurantId(id);
     }
 
     /**
@@ -142,14 +149,14 @@ public class RestaurantController {
      * @return the restaurant menu
      */
     @GetMapping(value = "/menu/item/{restaurantMenuId}")
-    @ApiOperation(value = "Retrieve a particular item restaurant on menu by id", response = Restaurant.class)
+    @Cacheable(value = "restaurant_menus", key = "#id")
+    @ApiOperation(value = "Retrieve a particular item restaurant on menu by id", response = RestaurantMenu.class)
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved a menu item by id"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public ResponseEntity<RestaurantMenu> getRestaurantMenu(@PathVariable("restaurantMenuId") UUID id) {
-        return new ResponseEntity<>(this.restaurantQueryService
-                .findRestaurantMenuById(id), HttpStatus.OK);
+    public RestaurantMenu getRestaurantMenu(@PathVariable("restaurantMenuId") UUID id) {
+        return this.restaurantQueryService.findRestaurantMenuById(id);
     }
 
     /**
