@@ -13,7 +13,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients("edu.mum.cs.deals")
 public class DealsServiceApplication {
-
     /**
      * The entry point of application.
      *

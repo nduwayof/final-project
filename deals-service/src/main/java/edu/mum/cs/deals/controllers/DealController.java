@@ -4,6 +4,7 @@ import edu.mum.cs.deals.configurations.DealsFeignProxy;
 import edu.mum.cs.deals.models.Deal;
 import edu.mum.cs.deals.services.IDealQueryService;
 import edu.mum.cs.deals.services.IDealService;
+import edu.mum.cs.deals.utilities.ResourceNotFoundException;
 import edu.mum.cs.deals.utilities.beans.RestaurantMenuBean;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -48,12 +49,14 @@ public class DealController {
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public Deal postDeal(@RequestBody Deal deal){
+    public Deal postDeal(@RequestBody Deal deal) throws ResourceNotFoundException {
         Deal dealObj = null;
         if (deal.getMenuId() != null) {
             RestaurantMenuBean restaurantMenu = proxy.getRestaurantMenu(deal.getMenuId());
             if(restaurantMenu != null)
                 dealObj = this.dealService.saveDeal(deal);
+        }else{
+            throw  new ResourceNotFoundException("Menu item not found");
         }
         return dealObj;
     }
