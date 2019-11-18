@@ -31,15 +31,16 @@ route.post('/', async (req, res, next) => {
             total: total
         });
         const ord = await newOrd.save();
-        await producer.connect();
-        await producer.send({
-            topic: 'order',
-            messages: [{
-                value: JSON.stringify(ord)
-            }],
-        });
+        // await producer.connect();
+        // await producer.send({
+        //     topic: 'order',
+        //     messages: [{
+        //         value: JSON.stringify(ord)
+        //     }],
+        // });
         res.json(ord);
     } catch (err) {
+        console.log(err);
         next(err);
     }
 });

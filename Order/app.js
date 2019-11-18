@@ -19,14 +19,23 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', false);
 
-mongoose.connect('mongodb://mongodb:27017/favorites', err => {
-  if (!err) {
-    console.log('connected !');
-  } else {
-    console.log(err);
-  }
-});
-
+if (process.env.NODE_ENV === "test") {
+  var Mockgoose = require('mockgoose').Mockgoose;
+  var mockgoose = new Mockgoose(mongoose);
+  mockgoose.prepareStorage().then(function () {
+    mongoose.connect('mongodb://localhost/orders', function (err) {
+    });
+  });
+}
+else {
+  mongoose.connect('mongodb+srv://favsys:SWKn6983lCHZKGFo@fav-soyyk.mongodb.net/orders?retryWrites=true&w=majority', err => {
+    if (!err) {
+      console.log('connected !');
+    } else {
+      console.log(err);
+    }
+  });
+}
 app.use('/orders', orderRoute);
 
 // catch 404 and forward to error handler
