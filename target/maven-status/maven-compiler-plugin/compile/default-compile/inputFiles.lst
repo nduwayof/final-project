@@ -1,0 +1,5 @@
+/home/afify/Projects/Notification-service/src/main/java/com/notification/model/Notification.java
+/home/afify/Projects/Notification-service/src/main/java/com/notification/controller/NotificationController.java
+/home/afify/Projects/Notification-service/src/main/java/com/notification/service/kafkaConsumerService.java
+/home/afify/Projects/Notification-service/src/main/java/com/notification/config/KafkaConfiguration.java
+/home/afify/Projects/Notification-service/src/main/java/com/notification/SpringBootProducerApplication.java
