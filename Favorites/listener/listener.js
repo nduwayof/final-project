@@ -8,7 +8,6 @@ const kafka = new Kafka({
 });
 
 const run = async _ => {
-    const producer = kafka.producer();
     const consumer = kafka.consumer({ groupId: 'ea-eats' });
 
     // Consuming
