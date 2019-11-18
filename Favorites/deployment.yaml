@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: favorites-deployment
+  labels:
+    app: favorites
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: favorites
+  template:
+    metadata:
+      labels:
+        app: favorites
+
+    spec:
+      containers:
+        - name: favorites
+          image: caiohoffmann/favorite:latest
+          ports:
+            - containerPort: 3000
