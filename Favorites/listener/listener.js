@@ -34,12 +34,11 @@ const run = async _ => {
 
             } else if (topic === 'rank') {
                 const rest = JSON.parse(message.value);
-                const rank = rest.votes[rest.votes.length - 1];
-                const fav = await Favorites.findOne({ user: rank.user, 'restaurants.ref': rest.restaurant });
+                const fav = await Favorites.findOne({ user: rank.userId, 'restaurants.ref': rest.rest_id });
                 if (fav === null) {
-                    const newFav = await Favorites.findOneAndUpdate({ user: rank.user }, { $push: { restaurants: { ref: rest.restaurant, rating: rank.stars } } });
+                    const newFav = await Favorites.findOneAndUpdate({ user: rest.userId }, { $push: { restaurants: { ref: rest.rest_id, rating: rest.vote } } });
                 } else {
-                    const upFav = await Favorites.findOneAndUpdate({ user: rank.user, 'restaurants.ref': rest.restaurant }, { $set: { 'restaurants.$.rating': rank.stars, 'restaurants.$.ref': rest.restaurant } }, { new: true, upsert: true }).exec();
+                    const upFav = await Favorites.findOneAndUpdate({ user: rest.userId, 'restaurants.ref': rest.rest_id }, { $set: { 'restaurants.$.rating': rest.vote, 'restaurants.$.ref': rest.restaurant } }, { new: true, upsert: true }).exec();
                 }
             }
         }
