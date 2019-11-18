@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * The type Deals service application.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */

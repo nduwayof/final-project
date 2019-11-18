@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * The type Resource not found exception.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */

@@ -19,7 +19,7 @@ import java.util.List;
 @Configuration
 public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
-    private static final String KEYSPACE = "restaurants_keyspace";
+    private static final String KEYSPACE = "deals_keyspace";
 
     @Override
     protected String getKeyspaceName() {
@@ -48,6 +48,6 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     public String[] getEntityBasePackages() {
-        return new String[]{"edu.mum.cs.restaurants.models"};
+        return new String[]{"edu.mum.cs.deals.models"};
     }
 }

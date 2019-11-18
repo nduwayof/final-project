@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 
 /**
  * The type Global exception handler.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */

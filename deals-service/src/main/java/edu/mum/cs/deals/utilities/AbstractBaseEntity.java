@@ -10,6 +10,7 @@ import java.util.UUID;
 
 /**
  * The type Abstract base entity.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */

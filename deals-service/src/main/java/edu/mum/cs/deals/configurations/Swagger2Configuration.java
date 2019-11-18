@@ -15,6 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * The type Swagger 2 configuration.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */
@@ -39,23 +40,23 @@ public class Swagger2Configuration implements WebMvcConfigurer {
      */
     @Bean
     public Docket apiDocket() {
-
+        String basePackage = "edu.mum.cs.deals.controllers";
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(getApiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("edu.mum.cs.restaurants.controllers"))
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo getApiInfo() {
-
+        String url = "https://www.linkedin.com/in/fabrice-nduwayo/";
         return new ApiInfoBuilder()
-                .title("Restaurants REST API Doc")
-                .description("More description about Restaurant REST API")
-                .contact(new Contact("Fabrice Nduwayo","https://www.linkedin.com/in/fabrice-nduwayo/","fnduwayo@mum.edu"))
-                .licenseUrl("https://www.linkedin.com/in/fabrice-nduwayo/")
-                .termsOfServiceUrl("https://www.linkedin.com/in/fabrice-nduwayo/")
+                .title("Deals REST API Doc")
+                .description("More description about Deal REST API")
+                .contact(new Contact("Fabrice Nduwayo", url ,"fnduwayo@mum.edu"))
+                .licenseUrl(url)
+                .termsOfServiceUrl(url)
                 .version("1.0")
                 .build();
     }
