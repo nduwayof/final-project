@@ -39,14 +39,14 @@ async function redirect(req, res, next, name, envUrl) {
     if (req.method === 'GET') {
         try {
             const ret = await axios.get('http://' + envUrl + ':3000' + req.baseUrl, req.params);
-            res.json(ret);
+            res.json(ret.data, ret.status);
         } catch (err) {
             return next(err);
         }
     } else if (req.method === 'POST') {
         try {
             const ret = await axios.post('http://' + envUrl + ':3000' + req.baseUrl, req.body);
-            res.json(ret);
+            res.json(ret.data, ret.status);
         } catch (err) {
             console.log(err);
             return next(err);
