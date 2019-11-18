@@ -1,0 +1,34 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: orderstatus-service
+  labels:
+    app: orderstatus-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: orderstatus-service
+    spec:
+      imagePullSecrets:
+      - name: registry-secret
+      containers:
+      - name: orderstatus-service
+        image: gcr.io/powerful-genre-259022/producer-30:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: native
+        - name: VERSION
+          value: 'K8S_TIMESTAMP'
+        - name: CASSANDRA_PASSWORD
+          valueFrom:
+           secretKeyRef:
+            key: cassandra-password
+            name: mycass-cassandra
+      nodeSelector:
+        beta.kubernetes.io/os: linux
