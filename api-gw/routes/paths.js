@@ -30,24 +30,29 @@ route.use('/payment', checkJWT, async (req, res, next) => {
 route.use('/deals', checkJWT, async (req, res, next) => {
     await redirect(req, res, next, '/deals', process.env.dealsServ);
 });
-route.use('/favorites', checkJWT, async (req, res, next) => {
+route.use('/favorites', async (req, res, next) => {
     await redirect(req, res, next, '/favorites', process.env.favoriteServ);
 });
 
 async function redirect(req, res, next, name, envUrl) {
-    const path = req.baseUrl.split(name)[1];
+    //const path = req.baseUrl.split(name)[1];
     if (req.method === 'GET') {
         try {
-            const ret = await axios.get(envUrl + path, req.params);
+            const ret = await axios.get('http://' + envUrl + ':3000' + req.baseUrl, req.params);
             res.json(ret);
         } catch (err) {
-            next(err);
+            return next(err);
         }
     } else if (req.method === 'POST') {
-        const ret = await axios.post(envUrl + path, req.body);
-        res.json(ret);
+        try {
+            const ret = await axios.post('http://' + envUrl + ':3000' + req.baseUrl, req.body);
+            res.json(ret);
+        } catch (err) {
+            console.log(err);
+            return next(err);
+        }
     } else {
-        next('Method not suported');
+        return next('Method not suported');
     }
 }
 
