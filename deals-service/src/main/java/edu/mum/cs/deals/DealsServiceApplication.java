@@ -2,6 +2,7 @@ package edu.mum.cs.deals;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * The type Deals service application.
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @version 1.0
  */
 @SpringBootApplication
+@EnableFeignClients("edu.mum.cs.deals")
 public class DealsServiceApplication {
 
     /**

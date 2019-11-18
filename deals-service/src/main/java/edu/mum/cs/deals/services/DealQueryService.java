@@ -11,6 +11,7 @@ import java.util.UUID;
 
 /**
  * The type Deal query service.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */

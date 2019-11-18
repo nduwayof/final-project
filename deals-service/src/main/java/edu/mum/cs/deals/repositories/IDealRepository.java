@@ -10,6 +10,7 @@ import java.util.UUID;
 
 /**
  * The interface Deal repository.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */
