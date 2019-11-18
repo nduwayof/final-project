@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gw-deployment
+  labels:
+    app: api-gw
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gw
+  template:
+    metadata:
+      labels:
+        app: api-gw
+
+    spec:
+      containers:
+        - name: api-gw
+          image: caiohoffmann/apigw:latest
+          ports:
+            - containerPort: 8085
+          env:
+            - name: locationServ
+              value: ea-wk2-db
+            - name: notificationServ
+              value: ea-wk2-db  
+            - name: userServ
+              value: ea-wk2-db  
+            - name: orderStatuServ
+              value: ea-wk2-db   
+            - name: orderServ
+              value: orders   
+            - name: restaurantServ
+              value: ea-wk2-db   
+            - name: rankingServ
+              value: ea-wk2-db   
+            - name: paymentServ
+              value: ea-wk2-db   
+            - name: dealsServ
+              value: ea-wk2-db   
+            - name: favoriteServ
+              value: favorites   
+            - name: jwtSecret
+              value: mytopsecret
