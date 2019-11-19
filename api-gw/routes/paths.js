@@ -3,49 +3,46 @@ const axios = require('axios');
 
 const route = express.Router();
 
-route.use('/location', async (req, res, next) => {
-    await redirect(req, res, next, '/location', process.env.locationServ);
+route.use('/locations', async (req, res, next) => {
+    await redirect(req, res, next, '/location', process.env.locationServ, process.env.locationServPort);
 });
-route.use('/notification', checkJWT, async (req, res, next) => {
-    await redirect(req, res, next, '/notification', process.env.notificationServ);
+route.use('/users', async (req, res, next) => {
+    await redirect(req, res, next, '/users', process.env.userServ, process.env.userServPort);
 });
-route.use('/users', checkJWT, async (req, res, next) => {
-    await redirect(req, res, next, '/users', process.env.userServ);
+route.use('/orders/status', async (req, res, next) => {
+    await redirect(req, res, next, '/order/status', process.env.orderStatuServ, process.env.orderStatuServPort);
 });
-route.use('/order/status', checkJWT, async (req, res, next) => {
-    await redirect(req, res, next, '/order/status', process.env.orderStatuServ);
+route.use('/orders', async (req, res, next) => {
+    await redirect(req, res, next, '/order', process.env.orderServ, process.env.orderServPort);
 });
-route.use('/order', checkJWT, async (req, res, next) => {
-    await redirect(req, res, next, '/order', process.env.orderServ);
+route.use('/restaurants', async (req, res, next) => {
+    await redirect(req, res, next, '/restaurants', process.env.restaurantServ, process.env.restaurantServPort);
 });
-route.use('/restaurants', checkJWT, async (req, res, next) => {
-    await redirect(req, res, next, '/restaurants', process.env.restaurantServ);
+route.use('/rankings', async (req, res, next) => {
+    await redirect(req, res, next, '/ranking', process.env.rankingServ, process.env.rankingServPort);
 });
-route.use('/ranking', checkJWT, async (req, res, next) => {
-    await redirect(req, res, next, '/ranking', process.env.rankingServ);
-});
-route.use('/payment', checkJWT, async (req, res, next) => {
+route.use('/payments', async (req, res, next) => {
     await redirect(req, res, next, '/payment', process.env.paymentServ);
 });
-route.use('/deals', checkJWT, async (req, res, next) => {
-    await redirect(req, res, next, '/deals', process.env.dealsServ);
+route.use('/deals', async (req, res, next) => {
+    await redirect(req, res, next, '/deals', process.env.dealsServ, process.env.dealsServPort);
 });
 route.use('/favorites', async (req, res, next) => {
-    await redirect(req, res, next, '/favorites', process.env.favoriteServ);
+    await redirect(req, res, next, '/favorites', process.env.favoriteServ, process.env.favoriteServPort);
 });
 
-async function redirect(req, res, next, name, envUrl) {
+async function redirect(req, res, next, name, envUrl, envPort) {
     //const path = req.baseUrl.split(name)[1];
     if (req.method === 'GET') {
         try {
-            const ret = await axios.get('http://' + envUrl + ':3000' + req.baseUrl, req.params);
+            const ret = await axios.get('http://' + envUrl + ':' + envPort + req.baseUrl, req.params);
             res.json(ret.data, ret.status);
         } catch (err) {
             return next(err);
         }
     } else if (req.method === 'POST') {
         try {
-            const ret = await axios.post('http://' + envUrl + ':3000' + req.baseUrl, req.body);
+            const ret = await axios.post('http://' + envUrl + ':' + envPort + req.baseUrl, req.body);
             res.json(ret.data, ret.status);
         } catch (err) {
             console.log(err);

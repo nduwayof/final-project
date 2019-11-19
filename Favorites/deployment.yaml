@@ -19,4 +19,4 @@ spec:
         - name: favorites
           image: caiohoffmann/favorite:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 3005

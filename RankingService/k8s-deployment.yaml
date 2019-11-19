@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ranking-service-deployment
+  labels:
+    app: ranking-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ranking-service
+  template:
+    metadata:
+      labels:
+        app: ranking-service
+
+    spec:
+      containers:
+        - name: ranking-service
+          image: caiohoffmann/ranking-service:latest
+          ports:
+            - containerPort: 8089
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: native
+            - name: VERSION
+              value: 'K8S_TIMESTAMP'
+            - name: CASSANDRA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: cassandra-password
+                  name: cas-db-cassandra
