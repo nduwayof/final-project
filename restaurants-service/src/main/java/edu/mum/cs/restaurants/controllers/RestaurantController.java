@@ -13,6 +13,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,9 +32,13 @@ import java.util.UUID;
 @Api(value = "Restaurants Service", description = "Restaurants micro service REST API")
 public class RestaurantController {
 
+    private static final String TOPIC = "restaurants";
+
     private IRestaurantService restaurantService;
 
     private IRestaurantQueryService restaurantQueryService;
+
+    private KafkaTemplate<String, Restaurant> restaurantKafkaTemplate;
 
     /**
      * Get restaurants response entity.
@@ -66,7 +71,9 @@ public class RestaurantController {
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
     public Restaurant postRestaurant(@RequestBody Restaurant restaurant) {
-        return this.restaurantService.saveRestaurant(restaurant);
+        Restaurant restaurantObj = this.restaurantService.saveRestaurant(restaurant);
+        this.restaurantKafkaTemplate.send(TOPIC, restaurantObj);
+        return restaurantObj;
     }
 
     /**

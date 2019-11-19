@@ -30,6 +30,11 @@ public class Swagger2Configuration implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
+    /**
+     * Api docket docket.
+     *
+     * @return the docket
+     */
     @Bean
     public Docket apiDocket() {
 
