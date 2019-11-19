@@ -53,7 +53,6 @@ public class RestaurantController {
                         @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
                         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
         public List<Restaurant> getRestaurants() {
-                System.out.println("Hey....");
                 return this.restaurantQueryService.findAllRestaurants();
         }
 
@@ -182,9 +181,8 @@ public class RestaurantController {
                         @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
                         @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
                         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
-        public ResponseEntity<List<RestaurantAddress>> getRestaurantAddresses(@PathVariable("restaurantId") UUID id) {
-                return new ResponseEntity<>(this.restaurantQueryService.findRestaurantAddressesByRestaurantId(id),
-                                HttpStatus.OK);
+        public List<RestaurantAddress> getRestaurantAddresses(@PathVariable("restaurantId") UUID id) {
+                return this.restaurantQueryService.findRestaurantAddressesByRestaurantId(id);
         }
 
         /**
@@ -200,9 +198,8 @@ public class RestaurantController {
                         @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
                         @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
                         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
-        public ResponseEntity<List<RestaurantSchedule>> getRestaurantSchedules(@PathVariable("restaurantId") UUID id) {
-                return new ResponseEntity<>(this.restaurantQueryService.findRestaurantScheduleByRestaurantId(id),
-                                HttpStatus.OK);
+        public List<RestaurantSchedule> getRestaurantSchedules(@PathVariable("restaurantId") UUID id) {
+                return this.restaurantQueryService.findRestaurantScheduleByRestaurantId(id);
         }
 
         /**
@@ -220,10 +217,8 @@ public class RestaurantController {
                         @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
                         @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
                         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
-        public ResponseEntity<RestaurantSchedule> getRestaurantSchedule(@PathVariable("restaurantId") UUID id,
+        public RestaurantSchedule getRestaurantSchedule(@PathVariable("restaurantId") UUID id,
                         @PathVariable("day") EWeekDay day) {
-                return new ResponseEntity<>(
-                                this.restaurantQueryService.findRestaurantScheduleByRestaurantIdAndDay(id, day),
-                                HttpStatus.OK);
+                return this.restaurantQueryService.findRestaurantScheduleByRestaurantIdAndDay(id, day);
         }
 }
