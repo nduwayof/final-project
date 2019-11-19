@@ -10,6 +10,7 @@ import org.springframework.data.cassandra.core.cql.keyspace.DropKeyspaceSpecific
 import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.datastax.driver.core.PlainTextAuthProvider;
@@ -24,7 +25,7 @@ import com.datastax.driver.core.policies.ConstantReconnectionPolicy;
 @Configuration
 public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
-    @Value("${spring.data.cassandra.contactpoints}")
+    @Value("${spring.data.cassandra.contact-points}")
     private String contactPoints;
     @Value("${spring.data.cassandra.port}")
     private int port;
@@ -72,15 +73,17 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
-
-        CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace(keyspace).ifNotExists()
-                .with(KeyspaceOption.DURABLE_WRITES, true);
-
-        return Arrays.asList(specification);
+        return Collections.singletonList(CreateKeyspaceSpecification.createKeyspace(keyspace).ifNotExists()
+                .with(KeyspaceOption.DURABLE_WRITES, true));
     }
 
     @Override
     protected List<DropKeyspaceSpecification> getKeyspaceDrops() {
-        return Arrays.asList(DropKeyspaceSpecification.dropKeyspace(keyspace));
+        return Collections.singletonList(DropKeyspaceSpecification.dropKeyspace(keyspace));
+    }
+
+    @Override
+    public String[] getEntityBasePackages() {
+        return new String[]{"edu.mum.cs.restaurants.models"};
     }
 }

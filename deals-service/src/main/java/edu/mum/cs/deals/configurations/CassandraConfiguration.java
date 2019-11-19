@@ -1,5 +1,7 @@
 package edu.mum.cs.deals.configurations;
 
+import com.datastax.driver.core.PlainTextAuthProvider;
+import com.datastax.driver.core.policies.ConstantReconnectionPolicy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.config.AbstractCassandraConfiguration;
@@ -9,12 +11,8 @@ import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecif
 import org.springframework.data.cassandra.core.cql.keyspace.DropKeyspaceSpecification;
 import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import com.datastax.driver.core.PlainTextAuthProvider;
-import com.datastax.driver.core.policies.ConstantReconnectionPolicy;
 
 /**
  * The type Cassandra configuration.
