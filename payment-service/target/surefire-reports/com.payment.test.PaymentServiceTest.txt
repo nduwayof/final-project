@@ -1,0 +1,13 @@
+-------------------------------------------------------------------------------
+Test set: com.payment.test.PaymentServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.506 s <<< FAILURE! - in com.payment.test.PaymentServiceTest
+savePayment  Time elapsed: 0.484 s  <<< ERROR!
+org.mockito.exceptions.misusing.NullInsteadOfMockException: 
+
+Argument passed to when() is null!
+Example of correct stubbing:
+    doThrow(new RuntimeException()).when(mock).someMethod();
+Also, if you use @Mock annotation don't miss initMocks()
+	at com.payment.test.PaymentServiceTest.savePayment(PaymentServiceTest.java:38)
+
