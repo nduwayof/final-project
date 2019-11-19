@@ -183,6 +183,27 @@ k8s-service-create-rk:
 k8s-service-delete-rk:
 	kubectl delete -f RankingService/k8s-service.yaml
 
+#===================  Payment  ===========================
+
+build-pay:
+	mvn clean install -f payment-service/
+docker-build-pay: build-pay
+	docker build -t caiohoffmann/payment-service:latest payment-service/.
+
+docker-push-pay: docker-login docker-build-pay
+	docker push caiohoffmann/payment-service:latest
+
+k8s-deployment-create-pay: docker-push-pay
+	kubectl apply -f payment-service/k8s-deployment.yaml
+k8s-deployment-delete-pay:
+	kubectl delete -f payment-service/k8s-deployment.yaml
+
+
+k8s-service-create-pay:
+	kubectl apply -f payment-service/k8s-service.yaml
+k8s-service-delete-pay:
+	kubectl delete -f payment-service/k8s-service.yaml
+
 
 #===================  Restaurants  ===========================
 	
@@ -204,6 +225,10 @@ k8s-service-create-rest:
 	kubectl apply -f restaurants-service/k8s-service.yaml
 k8s-service-delete-rest:
 	kubectl delete -f restaurants-service/k8s-service.yaml
+k8s-expose-create-rest:
+	kubectl expose deployment restaurants-service-deployment --type=LoadBalancer --port 80 --target-port 8091
+k8s-expose-delete-rest:
+	kubectl delete service restaurants-service-deployment
 
 #===========================================				Final				===================================
 

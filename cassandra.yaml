@@ -1,3 +1,5 @@
 # cluster:
 #   replicaCount: 3
 #   seedCount: 3
+dbUser:
+  password: mysecretkey

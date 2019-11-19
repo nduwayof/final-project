@@ -8,5 +8,5 @@ spec:
     app: restaurants-service
   ports:
     - protocol: TCP
-      port: 8094
-      targetPort: 8084
+      port: 8091
+      targetPort: 8091

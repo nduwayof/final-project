@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: location-service
-          image: widjesh/location-service:latest
+          image: caiohoffmann/location-service:latest
           ports:
             - containerPort: 4000

@@ -29,6 +29,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    console.log('hey....');
     const user = new User({
       name: req.body.name,
       email: req.body.email,
@@ -52,11 +53,16 @@ router.post("/", async (req, res) => {
         message: `User could not be saved`
       });
     } else {
-      await producer.connect();
-      await producer.send({
-        topic: "user",
-        messages: [{ value: JSON.stringify(savedUser) }]
-      });
+      console.log('kafka.....');
+      try {
+        await producer.connect();
+        await producer.send({
+          topic: "user",
+          messages: [{ value: JSON.stringify(savedUser) }]
+        });
+      } catch (err) {
+        console.log(err);
+      }
       res.json(savedUser);
     }
   } catch (err) {

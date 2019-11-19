@@ -19,7 +19,7 @@ spec:
         - name: restaurants-service
           image: caiohoffmann/restaurants-service:latest
           ports:
-            - containerPort: 8084
+            - containerPort: 8091
           env:
             - name: CASSANDRA_PASSWORD
               valueFrom:

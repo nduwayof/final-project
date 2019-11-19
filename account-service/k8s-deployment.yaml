@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
         - name: account-service2
-          image: widjesh/account-service2:latest
+          image: caiohoffmann/account-service2:latest
           ports:
             - containerPort: 3000

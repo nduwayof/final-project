@@ -35,14 +35,15 @@ async function redirect(req, res, next, name, envUrl, envPort) {
     //const path = req.baseUrl.split(name)[1];
     if (req.method === 'GET') {
         try {
-            const ret = await axios.get('http://' + envUrl + ':' + envPort + req.baseUrl, req.params);
+            const ret = await axios.get('http://' + envUrl + ':' + envPort + req.originalUrl, req.params);
             res.json(ret.data, ret.status);
         } catch (err) {
+            console.log(err);
             return next(err);
         }
     } else if (req.method === 'POST') {
         try {
-            const ret = await axios.post('http://' + envUrl + ':' + envPort + req.baseUrl, req.body);
+            const ret = await axios.post('http://' + envUrl + ':' + envPort + req.originalUrl, req.body);
             res.json(ret.data, ret.status);
         } catch (err) {
             console.log(err);
