@@ -22,24 +22,38 @@ spec:
             - containerPort: 8085
           env:
             - name: locationServ
-              value: ea-wk2-db
-            - name: notificationServ
-              value: ea-wk2-db  
+              value: location-service
+            - name: locationServPort
+              value: '4000'
             - name: userServ
-              value: ea-wk2-db  
+              value: account-service2  
+            - name: userServPort
+              value: '3000'  
             - name: orderStatuServ
-              value: ea-wk2-db   
+              value: order-status  
+            - name: orderStatuServPort
+              value: '8097'  
             - name: orderServ
-              value: orders   
+              value: orders
+            - name: orderServPort
+              value: '8082'   
             - name: restaurantServ
-              value: ea-wk2-db   
+              value: restaurants-service 
+            - name: restaurantServPort
+              value: '8091'  
             - name: rankingServ
-              value: ea-wk2-db   
+              value: ranking-service   
+            - name: rankingServPort
+              value: '8099'  
             - name: paymentServ
               value: ea-wk2-db   
             - name: dealsServ
-              value: ea-wk2-db   
+              value: deals
+            - name: dealsServPort
+              value: '8094'
             - name: favoriteServ
-              value: favorites   
+              value: favorites
+            - name: favoriteServPort
+              value: "3005"
             - name: jwtSecret
               value: mytopsecret

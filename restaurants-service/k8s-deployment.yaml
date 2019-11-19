@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: restaurants-service-deployment
+  labels:
+    app: restaurants-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: restaurants-service
+  template:
+    metadata:
+      labels:
+        app: restaurants-service
+
+    spec:
+      containers:
+        - name: restaurants-service
+          image: caiohoffmann/restaurants-service:latest
+          ports:
+            - containerPort: 8084
+          env:
+            - name: CASSANDRA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: cassandra-password
+                  name: cas-db-cassandra

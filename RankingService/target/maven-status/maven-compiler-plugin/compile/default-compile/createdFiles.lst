@@ -1,0 +1,9 @@
+com\example\demo\DemoApplication.class
+com\example\demo\controller\RankingController.class
+com\example\demo\model\Vote.class
+com\example\demo\CassandraConfig.class
+com\example\demo\repository\RankingRepository.class
+com\example\demo\engine\PayloadSerializer.class
+com\example\demo\engine\Producer.class
+com\example\demo\model\PayLoad.class
+com\example\demo\model\Ranking.class

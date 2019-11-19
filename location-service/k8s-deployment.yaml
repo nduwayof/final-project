@@ -5,7 +5,7 @@ metadata:
   labels:
     app: location-service
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: location-service
@@ -20,33 +20,3 @@ spec:
           image: widjesh/location-service:latest
           ports:
             - containerPort: 4000
-          env:
-            - name: KEY1
-              valueFrom:
-                configMapKeyRef:
-                  name: location-service-config
-                  key: someKey1
-            - name: NEXT_SERVICE
-              valueFrom:
-                configMapKeyRef:
-                  name: location-service-config
-                  key: nextService
-            - name: SERVICE_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: location-service-secrets
-                  key: service-api-key
-            #MYSQL
-            - name: MYSQL_HOST
-              value: location-service-db
-
-            - name: MYSQL_USER
-              value: root
-            - name: MYSQL_PORT
-              value: "1"
-
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: location-service-secrets
-                  key: mysql-root-password

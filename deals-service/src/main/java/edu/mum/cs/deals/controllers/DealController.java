@@ -26,7 +26,7 @@ import java.util.UUID;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/deal/api/v1")
+@RequestMapping(value = "/deals/api/v1")
 public class DealController {
 
     private IDealService dealService;
@@ -45,18 +45,18 @@ public class DealController {
     @PostMapping
     @CachePut(value = "deals", key = "#deal")
     @ApiOperation(value = "View a list of available deals", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved list"),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
     public Deal postDeal(@RequestBody Deal deal) throws ResourceNotFoundException {
         Deal dealObj = null;
         if (deal.getMenuId() != null) {
             RestaurantMenuBean restaurantMenu = proxy.getRestaurantMenu(deal.getMenuId());
-            if(restaurantMenu != null)
+            if (restaurantMenu != null)
                 dealObj = this.dealService.saveDeal(deal);
-        }else{
-            throw  new ResourceNotFoundException("Menu item not found");
+        } else {
+            throw new ResourceNotFoundException("Menu item not found");
         }
         return dealObj;
     }
@@ -71,11 +71,11 @@ public class DealController {
     @DeleteMapping(value = "/delete/{id}")
     @CacheEvict(value = "deals", key = "#id")
     @ApiOperation(value = "Deleting a deal by id", response = Deal.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully deleted a deal"),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully deleted a deal"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public Deal deleteDeal(@PathVariable("id") UUID id){
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+    public Deal deleteDeal(@PathVariable("id") UUID id) {
         return this.dealService.deleteDealById(id);
     }
 
@@ -89,11 +89,11 @@ public class DealController {
     @GetMapping(value = "/{id}")
     @Cacheable(value = "deals", key = "#id")
     @ApiOperation(value = "View a list of available deals", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved list"),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public Deal getDeal(@PathVariable("id") UUID id){
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+    public Deal getDeal(@PathVariable("id") UUID id) {
         return this.dealQueryService.findDealById(id);
     }
 
@@ -105,11 +105,11 @@ public class DealController {
     @GetMapping
     @Cacheable(value = "deals")
     @ApiOperation(value = "View a list of available deals", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved a list deals"),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved a list deals"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public List<Deal> getDeals(){
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+    public List<Deal> getDeals() {
         return this.dealQueryService.findAllDeals();
     }
 
@@ -123,11 +123,11 @@ public class DealController {
     @GetMapping(value = "/menu/{id}")
     @Cacheable(value = "deals", key = "#id")
     @ApiOperation(value = "View a list of available deals by menu", response = List.class)
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Successfully retrieved a list deals by menu"),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved a list deals by menu"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
-            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")})
-    public List<Deal> getDealsByMenu(@PathVariable("id") UUID id){
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
+    public List<Deal> getDealsByMenu(@PathVariable("id") UUID id) {
         return this.dealQueryService.findDealsByMenuId(id);
 
     }

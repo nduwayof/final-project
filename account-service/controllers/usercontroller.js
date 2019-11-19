@@ -6,8 +6,8 @@ const { Kafka } = require("kafkajs");
 const bcrypt = require('bcrypt');
 
 const kafka = new Kafka({
-  clientId:'kafka_test',
-  brokers:['my-kafka:9092']
+  clientId: 'favorites',
+  brokers: ['my-kafka:9092']
 });
 
 const producer = kafka.producer();
@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
     } else {
       await producer.connect();
       await producer.send({
-        topic: "test1",
+        topic: "user",
         messages: [{ value: JSON.stringify(savedUser) }]
       });
       res.json(savedUser);

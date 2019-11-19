@@ -1,3 +1,0 @@
-cluster:
-  replicaCount: 3
-  seedCount: 3
