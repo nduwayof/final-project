@@ -28,7 +28,7 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping(value = "/restaurant/api/v1")
+@RequestMapping(value = "/restaurants/api/v1")
 @Api(value = "Restaurants Service", description = "Restaurants micro service REST API")
 public class RestaurantController {
 
