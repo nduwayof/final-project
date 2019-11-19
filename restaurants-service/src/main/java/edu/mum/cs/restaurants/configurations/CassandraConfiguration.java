@@ -9,7 +9,6 @@ import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecif
 import org.springframework.data.cassandra.core.cql.keyspace.DropKeyspaceSpecification;
 import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,6 +33,8 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Value("${spring.data.cassandra.username}")
     private String userName;
+    @Value("${CASSANDRA_PASSWORD}")
+    private String userPassword;
 
     @Override
     protected String getKeyspaceName() {
@@ -57,7 +58,8 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     public CassandraClusterFactoryBean cluster() {
-        PlainTextAuthProvider authProvider = new PlainTextAuthProvider(userName, System.getenv("CASSANDRA_PASSWORD"));
+        System.out.println(userName + " - " + userPassword);
+        PlainTextAuthProvider authProvider = new PlainTextAuthProvider(userName, userPassword);
 
         CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
 
@@ -84,6 +86,6 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     public String[] getEntityBasePackages() {
-        return new String[]{"edu.mum.cs.restaurants.models"};
+        return new String[] { "edu.mum.cs.restaurants.models" };
     }
 }

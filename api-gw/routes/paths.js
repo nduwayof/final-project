@@ -22,7 +22,7 @@ route.use('/rankings', async (req, res, next) => {
     await redirect(req, res, next, '/ranking', process.env.rankingServ, process.env.rankingServPort);
 });
 route.use('/payments', async (req, res, next) => {
-    await redirect(req, res, next, '/payment', process.env.paymentServ);
+    await redirect(req, res, next, '/payment', process.env.paymentServ, process.env.paymentServPort);
 });
 route.use('/deals', async (req, res, next) => {
     await redirect(req, res, next, '/deals', process.env.dealsServ, process.env.dealsServPort);

@@ -6,7 +6,8 @@ const User = new Schema({
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     roles: [String],
-    ref: { type: String, required: true, unique: true }
+    ref: { type: String, required: true, unique: true },
+    name: String
 });
 
 User.index({ email: 1, password: 1 });

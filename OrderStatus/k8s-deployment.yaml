@@ -25,8 +25,3 @@ spec:
               value: native
             - name: VERSION
               value: 'K8S_TIMESTAMP'
-            - name: CASSANDRA_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: cassandra-password
-                  name: cas-db-cassandra

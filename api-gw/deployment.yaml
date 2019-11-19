@@ -46,7 +46,9 @@ spec:
             - name: rankingServPort
               value: '8099'  
             - name: paymentServ
-              value: ea-wk2-db   
+              value: payment-service 
+            - name: paymentServPort
+              value: '8093'   
             - name: dealsServ
               value: deals
             - name: dealsServPort

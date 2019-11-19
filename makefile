@@ -201,8 +201,12 @@ k8s-deployment-delete-pay:
 
 k8s-service-create-pay:
 	kubectl apply -f payment-service/k8s-service.yaml
+	kubectl apply -f payment-service/k8s-config-map.yaml
+	kubectl apply -f payment-service/k8s-secrets.yaml
 k8s-service-delete-pay:
 	kubectl delete -f payment-service/k8s-service.yaml
+	kubectl delete -f payment-service/k8s-config-map.yaml
+	kubectl delete -f payment-service/k8s-secrets.yaml
 
 
 #===================  Restaurants  ===========================
@@ -233,13 +237,13 @@ k8s-expose-delete-rest:
 #===========================================				Final				===================================
 
 
-k8s-deployment-create : k8s-deployment-create-rest k8s-deployment-create-rk k8s-deployment-create-ord-st k8s-deployment-create-ord k8s-deployment-create-not k8s-deployment-create-loc k8s-deployment-create-fav k8s-deployment-create-deal k8s-deployment-create-gw k8s-deployment-create-acc 
+k8s-deployment-create : k8s-deployment-create-pay k8s-deployment-create-rest k8s-deployment-create-rk k8s-deployment-create-ord-st k8s-deployment-create-ord k8s-deployment-create-not k8s-deployment-create-loc k8s-deployment-create-fav k8s-deployment-create-deal k8s-deployment-create-gw k8s-deployment-create-acc 
 
-k8s-deployment-delete : k8s-deployment-delete-rest k8s-deployment-delete-rk k8s-deployment-delete-ord-st k8s-deployment-delete-ord k8s-deployment-delete-not k8s-deployment-delete-loc k8s-deployment-delete-fav k8s-deployment-delete-deal k8s-deployment-delete-gw k8s-deployment-delete-acc
+k8s-deployment-delete : k8s-deployment-delete-pay k8s-deployment-delete-rest k8s-deployment-delete-rk k8s-deployment-delete-ord-st k8s-deployment-delete-ord k8s-deployment-delete-not k8s-deployment-delete-loc k8s-deployment-delete-fav k8s-deployment-delete-deal k8s-deployment-delete-gw k8s-deployment-delete-acc
 
-k8s-service-create : k8s-service-create-rest k8s-service-create-rk k8s-service-create-ord-st k8s-service-create-ord k8s-service-create-not k8s-service-create-loc k8s-service-create-fav k8s-service-create-deal k8s-service-create-gw k8s-service-create-acc
+k8s-service-create : k8s-service-create-rest k8s-service-create-pay k8s-service-create-rk k8s-service-create-ord-st k8s-service-create-ord k8s-service-create-not k8s-service-create-loc k8s-service-create-fav k8s-service-create-deal k8s-service-create-gw k8s-service-create-acc
 	kubectl apply -f k8s-secrets.yaml
-k8s-service-delete : k8s-service-delete-rest k8s-service-delete-rk k8s-service-delete-ord-st k8s-service-delete-ord k8s-service-delete-not k8s-service-delete-loc k8s-service-delete-fav k8s-service-delete-deal k8s-service-delete-gw k8s-service-delete-acc
+k8s-service-delete : k8s-service-delete-pay k8s-service-delete-rest k8s-service-delete-rk k8s-service-delete-ord-st k8s-service-delete-ord k8s-service-delete-not k8s-service-delete-loc k8s-service-delete-fav k8s-service-delete-deal k8s-service-delete-gw k8s-service-delete-acc
 	kubectl delete -f k8s-secrets.yaml
 
 k8s-reset : k8s-deployment-delete k8s-service-delete  k8s-service-create  k8s-deployment-create 
@@ -255,7 +259,7 @@ helm-mongo-delete:
 
 ########		Cassandra Intallation 				####
 helm-cassandra-create:
-	helm install cas-db bitnami/cassandra -f cassandra.yaml
+	helm install cas-db incubator/cassandra -f cassandra.yaml
 helm-cassandra-delete:
 	helm uninstall cas-db
 

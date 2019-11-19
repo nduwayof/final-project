@@ -21,10 +21,10 @@ const run = async _ => {
             if (topic === 'user') {
                 const user = JSON.parse(message.value);
                 try {
-                    const fav = await Favorites.findOne({ user: user.id });
+                    const fav = await Favorites.findOne({ user: user._id });
                     if (fav === null) {
                         const newFav = new Favorites({
-                            user: user.id
+                            user: user._id
                         });
                         const f = await newFav.save();
                     }

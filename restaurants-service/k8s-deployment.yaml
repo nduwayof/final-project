@@ -20,9 +20,3 @@ spec:
           image: caiohoffmann/restaurants-service:latest
           ports:
             - containerPort: 8091
-          env:
-            - name: CASSANDRA_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  key: cassandra-password
-                  name: cas-db-cassandra

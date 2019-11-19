@@ -17,18 +17,20 @@ const run = async _ => {
     await consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
             const user = JSON.parse(message.value);
+            console.dir(user);
             try {
-                const use = await User.findOne({ ref: user.id });
+                const use = await User.findOne({ ref: user._id });
                 if (use === null) {
                     const newUser = new User({
-                        ref: user.id,
+                        ref: user._id,
                         email: user.email,
                         password: user.password,
-                        roles: user.roles
+                        roles: user.roles,
+                        name: user.name
                     });
-                    const f = await newFav.save();
+                    await newUser.save();
                 } else {
-                    const upUser = await User.updateOne({ ref: user.id }, { password: user.password, roles: user.roles });
+                    await User.updateOne({ ref: user._id }, { password: user.password, roles: user.roles, name: user.name });
                 }
             } catch (err) {
                 throw err;

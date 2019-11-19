@@ -1,19 +1,35 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+const User = require('../models/user');
 
 const route = express.Router();
 
 route.post('/login', async (req, res, next) => {
-    if (req.body.email === undefined || req.body.email.length < 5 || req.body.pass === undefined || req.body.pass.length < 6) {
+    if (req.body.email === undefined || req.body.email.length < 5 || req.body.pass === undefined) {
         return next('Invalid email or password.');
     }
-    const user = await User.findOne({ email: req.body.email, password: req.body.pass }).select('email,roles').exec();
+    const user = await User.findOne({ email: req.body.email }).exec();
     if (user === null || user.email === undefined) {
         next('User and/or password does not match.');
     }
-    const secret = process.env.jwtSecret;
-    const encrpt = await jwt.sign(user, secret);
-    res.headers.authorization = encrpt;
-    res.json({ msg: 'Sucessful log in', token: encrpt });
+    bcrypt.compare(req.body.pass, user.password, (err, same) => {
+        if (err) return next(err);
+        if (same) {
+            const secret = process.env.jwtSecret;
+            const encrpt = jwt.sign({
+                email: user.email,
+                roles: user.roles,
+                name: user.name
+            }, secret);
+            //res.headers.authorization = encrpt;
+            res.json({ msg: 'Sucessful log in', token: encrpt });
+        } else {
+            next("Invalid password");
+        }
+    });
+
 });
 
 route.post('/signin', async (req, res, next) => {

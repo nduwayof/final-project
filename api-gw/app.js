@@ -8,6 +8,7 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 
 const User = require('./models/user');
+const listener = require('./listeners/listener');
 
 const app = express();
 
@@ -29,8 +30,10 @@ mongoose.connect('mongodb+srv://favsys:SWKn6983lCHZKGFo@fav-soyyk.mongodb.net/au
   }
 });
 
-app.use(require('./routes/paths'));
 app.use('/auth', require('./routes/auth'));
+app.use(require('./routes/paths'));
+listener();
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
