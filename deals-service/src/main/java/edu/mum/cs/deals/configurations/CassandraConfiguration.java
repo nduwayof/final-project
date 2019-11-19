@@ -73,13 +73,19 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
-        CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace(keyspace).ifNotExists()
-                .with(KeyspaceOption.DURABLE_WRITES, true);
-        return Collections.singletonList(specification);
+        return Collections.singletonList(CreateKeyspaceSpecification.createKeyspace(keyspace)
+                .ifNotExists()
+                .with(KeyspaceOption.DURABLE_WRITES, true));
     }
 
     @Override
     protected List<DropKeyspaceSpecification> getKeyspaceDrops() {
         return Collections.singletonList(DropKeyspaceSpecification.dropKeyspace(keyspace));
     }
+
+    @Override
+    public String[] getEntityBasePackages() {
+        return new String[]{"edu.mum.cs.deals.models"};
+    }
+
 }
