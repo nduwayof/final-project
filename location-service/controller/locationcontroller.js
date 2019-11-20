@@ -25,8 +25,8 @@ router.delete("/delete", async (req, res) => {
 });
 
 //Geospatial API
-router.get("/all", async (req, res) => {
-  const r = await Restaurant.find({ "address.coord": { $near: [-91.96713, 41.02347] } });
+router.get("/nearest", async (req, res) => {
+  const r = await Restaurant.find({ "address.coord": { $near: [req.query.longitude, req.query.latitude] } });
   res.json(r);
 });
 
