@@ -11,11 +11,11 @@ public class OrderItem {
         this.name = name;
     }
 
-    public int getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(double value) {
         this.value = value;
     }
 
@@ -27,6 +27,6 @@ public class OrderItem {
         this.preparationTime = preparationTime;
     }
 
-    private  int value;
+    private  double value;
     private  int preparationTime;
 }
