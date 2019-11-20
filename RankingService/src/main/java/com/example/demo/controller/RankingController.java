@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.example.demo.engine.Producer;
+import com.example.demo.engine.Sender;
 import com.example.demo.model.PayLoad;
 import com.example.demo.model.Ranking;
 import com.example.demo.model.Vote;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class RankingController
 {
-	private final Producer producer;
+	private final Sender producer;
 
 
 
@@ -23,7 +22,7 @@ public class RankingController
 	RankingRepository rankingRepository;
 
 	@Autowired
-	RankingController(Producer producer) {
+	RankingController(Sender producer) {
 		this.producer = producer;
 	}
 
@@ -34,7 +33,7 @@ public class RankingController
 Ranking ranking = null;
 		boolean exist = false;
 		 exist =  rankingRepository.findById(payLoad.getRest_id()).isPresent();
-		Date date1=new SimpleDateFormat("MM/dd/yyyy").parse(payLoad.getData());
+		Date date1=new Date();
 		if(!exist)
 		{
 			ranking = new Ranking(payLoad.getRest_id(),new ArrayList<>());
@@ -44,12 +43,10 @@ Ranking ranking = null;
 		ranking = rankingRepository.findById(payLoad.getRest_id()).get();
 		}
 
-			Vote vote = new Vote(payLoad.getUserid(),payLoad.getVote(),date1);
+			Vote vote = new Vote(payLoad.getUserid(),date1,payLoad.getVote());
 			ranking.getVotes().add(vote);
 			rankingRepository.save(ranking);
-			producer.sendMessage(payLoad);
-
-
+			producer.send(payLoad);
 		return ranking;
 	}
 

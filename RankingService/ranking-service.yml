@@ -16,7 +16,7 @@ spec:
       - name: registry-secret
       containers:
       - name: ranking-service
-        image: gcr.io/powerful-genre-259022/producer-30:v1
+        image: gcr.io/powerful-genre-259022/rank-test88:v1
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8888
@@ -29,6 +29,6 @@ spec:
           valueFrom:
            secretKeyRef:
             key: cassandra-password
-            name: mycass-cassandra
+            name: mycass-cassandra1
       nodeSelector:
         beta.kubernetes.io/os: linux
