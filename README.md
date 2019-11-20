@@ -3,7 +3,7 @@
 API-Gateway : `http://35.238.91.208/${Entity}`
 
 VERB | Entity                                                        | Description   |
-:----|:-------------------------------------------------------------:|-------------:| 
+:----|:------------------------------------------------------------- |-------------:| 
 GET  | users                                                         | Get all users 
 GET  | users/:id                                                     | Get user by Id  
 POST | users                                                         | Register a user  
