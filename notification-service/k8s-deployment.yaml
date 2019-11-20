@@ -20,6 +20,16 @@ spec:
         ports:
           - containerPort: 8080
         env:
+          - name: USER_SERVICE
+            valueFrom:
+              configMapKeyRef:
+                name: notification-service-config
+                key: user-service
+          - name: API
+            valueFrom:
+              configMapKeyRef:
+                name: notification-service-config
+                key: user-api
           - name: KAFKA_TOPIC
             valueFrom:
               configMapKeyRef:

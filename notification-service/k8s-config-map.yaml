@@ -5,4 +5,6 @@ metadata:
 data:
   kafka-server: my-kafka:9092
   kafka-topic: notification
+  user-service: account-service2:3000
+  user-api: users
 
