@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import com.payment.model.Payment;
 import com.payment.service.PaymentService;
 
 @RestController
+@EnableDiscoveryClient
 public class PaymentController {
 
     @Autowired
