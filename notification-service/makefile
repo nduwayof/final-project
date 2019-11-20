@@ -11,7 +11,7 @@ run-local: build
 	java -jar build/libs/ServiceA-*.jar
 
 #===================  docker  ===========================
-docker-build: build
+docker-build:
 	docker build -t ahmedheshamafify/notification-service:latest .
 
 
