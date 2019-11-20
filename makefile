@@ -249,6 +249,8 @@ k8s-service-delete : k8s-service-delete-pay k8s-service-delete-rest k8s-service-
 
 k8s-reset : k8s-deployment-delete k8s-service-delete  k8s-service-create  k8s-deployment-create 
 
+helm-create: helm-mongo-create helm-cassandra-create helm-kafka-create helm-redis-create
+helm-delete: helm-mongo-delete helm-cassandra-delete helm-kafka-delete helm-redis-delete
 
 
 ########		MongoDB Intallation 				####
