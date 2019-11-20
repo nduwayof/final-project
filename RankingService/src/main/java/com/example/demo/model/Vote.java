@@ -7,13 +7,23 @@ import java.util.Date;
 
 @UserDefinedType
 public class Vote {
-    private int userid;
+    private String userid;
 private Date data;
 
-    public Vote(int userid, int vote,Date data ) {
+    int vote;
+
+    public Vote(String userid, Date data, int vote) {
         this.userid = userid;
         this.data = data;
         this.vote = vote;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public Date getData() {
@@ -24,18 +34,6 @@ private Date data;
         this.data = data;
     }
 
-
-
-    private int vote;
-
-    public int getUserid() {
-        return userid;
-    }
-
-    public void setUserid(int userid) {
-        this.userid = userid;
-    }
-
     public int getVote() {
         return vote;
     }
@@ -43,8 +41,4 @@ private Date data;
     public void setVote(int vote) {
         this.vote = vote;
     }
-
-
-
-
 }
