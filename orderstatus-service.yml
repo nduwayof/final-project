@@ -16,10 +16,10 @@ spec:
       - name: registry-secret
       containers:
       - name: orderstatus-service
-        image: gcr.io/powerful-genre-259022/producer-30:v1
+        image: gcr.io/powerful-genre-259022/order-caio7:v1
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8000
+        - containerPort: 8080
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: native
@@ -29,6 +29,6 @@ spec:
           valueFrom:
            secretKeyRef:
             key: cassandra-password
-            name: mycass-cassandra
+            name: mycass-cassandra1
       nodeSelector:
         beta.kubernetes.io/os: linux
