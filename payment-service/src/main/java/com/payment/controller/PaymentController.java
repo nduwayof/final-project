@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.payment.model.Payment;
 import com.payment.service.PaymentService;
 
-
-
 @RestController
 public class PaymentController {
 
@@ -24,29 +22,29 @@ public class PaymentController {
 
     @PostMapping("/payment")
     public ResponseEntity<String> processPayment(@RequestBody Payment orderPayment) {
-    	if(orderPayment != null) {
-    		boolean paid = paymentService.savePayment(orderPayment);
-    		if (paid) {
-    		return ResponseEntity.ok("Order Paid Successfully");
-    		}
-    	}
-    	return ResponseEntity.ok("Order not paid check you credit card validition");
+        if (orderPayment != null) {
+            boolean paid = paymentService.savePayment(orderPayment);
+            if (paid) {
+                return ResponseEntity.ok("Order Paid Successfully");
+            }
+        }
+        return ResponseEntity.ok("Order not paid check you credit card validition");
     }
-    
+
     @GetMapping("/getAllPayments")
-    public ResponseEntity<List<Payment>> getAllPayments(){
-    	return ResponseEntity.ok(paymentService.getAllPayments());
+    public ResponseEntity<List<Payment>> getAllPayments() {
+        return ResponseEntity.ok(paymentService.getAllPayments());
     }
-    
+
     @PostMapping("/getPaymentById")
-    public ResponseEntity<Payment> getPaymentById(@RequestBody ObjectId paymentId){
-    	Optional<Payment> payment = paymentService.getPaymentById(paymentId);
-    	return ResponseEntity.ok(payment.get());
+    public ResponseEntity<Payment> getPaymentById(@RequestBody ObjectId paymentId) {
+        Optional<Payment> payment = paymentService.getPaymentById(paymentId);
+        return ResponseEntity.ok(payment.get());
     }
-    
+
     @PostMapping("/getPaymentByOrderId")
-    public ResponseEntity<Payment> getPaymentByOrderId(@RequestBody String orderId){
-    	return ResponseEntity.ok(paymentService.getPaymentByOrderId(orderId));
+    public ResponseEntity<Payment> getPaymentByOrderId(@RequestBody String orderId) {
+        return ResponseEntity.ok(paymentService.getPaymentByOrderId(orderId));
     }
 
 }

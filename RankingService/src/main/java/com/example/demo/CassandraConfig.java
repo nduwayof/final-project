@@ -10,38 +10,46 @@ import org.springframework.data.cassandra.core.cql.keyspace.DropKeyspaceSpecific
 import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-
-
 @Configuration
-public class CassandraConfig extends AbstractCassandraConfiguration{
-    @Value("${spring.data.cassandra.contactpoints}") private String contactPoints;
-    @Value("${spring.data.cassandra.port}") private int port;
-    @Value("${spring.data.cassandra.keyspace-name}") private String keyspace;
+public class CassandraConfig extends AbstractCassandraConfiguration {
+    @Value("${spring.data.cassandra.contactpoints}")
+    private String contactPoints;
+    @Value("${spring.data.cassandra.port}")
+    private int port;
+    @Value("${spring.data.cassandra.keyspace-name}")
+    private String keyspace;
 
-    @Value("${spring.data.cassandra.username}") private String userName;
+    @Value("${spring.data.cassandra.username}")
+    private String userName;
 
-
-    @Override protected String getKeyspaceName() {
+    @Override
+    protected String getKeyspaceName() {
         return keyspace;
     }
-    @Override protected String getContactPoints() {
+
+    @Override
+    protected String getContactPoints() {
         return contactPoints;
     }
-    @Override protected int getPort() {
+
+    @Override
+    protected int getPort() {
         return port;
     }
-    @Override public SchemaAction getSchemaAction() {
+
+    @Override
+    public SchemaAction getSchemaAction() {
         return SchemaAction.CREATE_IF_NOT_EXISTS;
     }
-
 
     @Override
     public CassandraClusterFactoryBean cluster() {
         PlainTextAuthProvider authProvider = new PlainTextAuthProvider(userName, System.getenv("CASSANDRA_PASSWORD"));
 
-        CassandraClusterFactoryBean cluster=new CassandraClusterFactoryBean();
+        CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
 
         cluster.setJmxReportingEnabled(false);
         cluster.setContactPoints(contactPoints);
@@ -53,24 +61,17 @@ public class CassandraConfig extends AbstractCassandraConfiguration{
         return cluster;
     }
 
-
     @Override
     protected List<CreateKeyspaceSpecification> getKeyspaceCreations() {
 
-        CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace(keyspace)
-                .ifNotExists()
+        CreateKeyspaceSpecification specification = CreateKeyspaceSpecification.createKeyspace(keyspace).ifNotExists()
                 .with(KeyspaceOption.DURABLE_WRITES, true);
 
         return Arrays.asList(specification);
     }
 
-
-
     @Override
     protected List<DropKeyspaceSpecification> getKeyspaceDrops() {
-        return Arrays.asList(DropKeyspaceSpecification.dropKeyspace(keyspace));
+        return Collections.singletonList(DropKeyspaceSpecification.dropKeyspace(keyspace));
     }
-
-
-
 }

@@ -6,11 +6,14 @@ const logger = require('morgan');
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const mongoose = require('mongoose');
+var cors = require('cors');
 
 const User = require('./models/user');
 const listener = require('./listeners/listener');
 
 const app = express();
+
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());

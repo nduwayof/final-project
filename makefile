@@ -105,10 +105,10 @@ k8s-service-delete-loc:
 build-not:
 	mvn clean install -f notification-service/
 docker-build-not: build-not
-	docker build -t caiohoffmann/location-service:latest notification-service/.
+	docker build -t caiohoffmann/notification-service:latest notification-service/.
 
 docker-push-not: docker-login docker-build-not
-	docker push caiohoffmann/location-service:latest
+	docker push caiohoffmann/notification-service:latest
 
 k8s-deployment-create-not: docker-push-not
 	kubectl apply -f notification-service/k8s-deployment.yaml
@@ -273,6 +273,6 @@ helm-kafka-delete:
 
 ##########       REDIS 							######
 helm-redis-create:
-	helm install redis stable/redis -f redis.yaml
+	helm install redis bitnami/redis -f redis.yaml
 helm-redis-delete:
 	helm uninstall redis

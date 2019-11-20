@@ -9,4 +9,4 @@ spec:
   ports:
     - protocol: TCP
       port: 8093
-      targetPort: 8083
+      targetPort: 8093

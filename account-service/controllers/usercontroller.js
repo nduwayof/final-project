@@ -12,11 +12,11 @@ const kafka = new Kafka({
 
 const producer = kafka.producer();
 
-router.get('/:id', async (req,res)=>{
-  const user = await User.findById({_id:req.body.id});
-  if(!user){
-    res.json({message:`User with ${req.body.id} not found !`});
-  }else{
+router.get('/:id', async (req, res) => {
+  const user = await User.findById({ _id: req.params.id });
+  if (!user) {
+    res.json({ message: `User with ${req.body.id} not found !` });
+  } else {
     res.json(user);
   }
 });

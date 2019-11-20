@@ -4,11 +4,10 @@ import org.springframework.data.cassandra.core.mapping.UserDefinedType;
 
 import java.util.Date;
 
-
 @UserDefinedType
 public class Vote {
     private String userid;
-private Date data;
+    private Date data;
 
     int vote;
 
