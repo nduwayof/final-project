@@ -17,6 +17,7 @@ import java.util.UUID;
 
 /**
  * The type Restaurant query service.
+ *
  * @author nduwayofabrice
  * @version 1.0
  */
@@ -83,9 +84,11 @@ public class RestaurantQueryService implements IRestaurantQueryService{
     }
 
     private void fetchRestaurant(@NotNull final Restaurant restaurantObj){
-        restaurantObj.setAddresses(this
+        List<RestaurantAddress> restaurantAddresses = this
                 .restaurantAddressRepository
-                .findByRestaurantId(restaurantObj.getId()));
+                .findByRestaurantId(restaurantObj.getId());
+        getCoordinates(restaurantAddresses);
+        restaurantObj.setAddresses(restaurantAddresses);
         restaurantObj.setMenus(this
                 .restaurantMenuRepository
                 .findByRestaurantId(restaurantObj.getId()));
@@ -93,4 +96,12 @@ public class RestaurantQueryService implements IRestaurantQueryService{
                 .restaurantScheduleRepository
                 .findByRestaurantId(restaurantObj.getId()));
     }
+
+    private void getCoordinates(List<RestaurantAddress> restaurantAddresses){
+        for(RestaurantAddress restaurantAddress : restaurantAddresses){
+            restaurantAddress.getCoord()[0] = restaurantAddress.getLongitude();
+            restaurantAddress.getCoord()[1] = restaurantAddress.getLatitude();
+        }
+    }
+
 }
