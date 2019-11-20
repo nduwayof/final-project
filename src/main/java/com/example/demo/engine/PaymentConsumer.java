@@ -28,7 +28,7 @@ public class PaymentConsumer {
             state.setDate(new Date());
             state.setDescription("Payment completed Order Done");
             orderStatus.getStates().add(state);
-
+            orderStatusRepository.save(orderStatus);
             Notification notification = new Notification();
             notification.setStatus(state.getDescription());
             notification.setUserEmail(orderStatus.getUserid());
