@@ -1,11 +1,8 @@
 /Order/node_modules/
-/Order/bin/
 /Order/.vscode
 /location-service/node_modules/
-/location-service/bin/
 /location-service/.vscode/
 /api-gw/node_modules/
-/api-gw/bin/
 /api-gw/.vscode/
 
 /OrderStatus/target/
@@ -14,10 +11,8 @@
 /payment-service/target/
 
 /restaurants-service/build/
-/restaurants-service/bin/
 /restaurants-service/gradle/
 /deals-service/build/
-/deals-service/bin/
 /deals-service/gradle/
 
 
