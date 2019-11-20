@@ -72,7 +72,7 @@ public class RestaurantController {
                         @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
         public Restaurant postRestaurant(@RequestBody Restaurant restaurant) {
                 Restaurant restaurantObj = this.restaurantService.saveRestaurant(restaurant);
-                this.restaurantKafkaTemplate.send(TOPIC, restaurantObj);
+                //this.restaurantKafkaTemplate.send(TOPIC, restaurantObj);
                 return restaurantObj;
         }
 

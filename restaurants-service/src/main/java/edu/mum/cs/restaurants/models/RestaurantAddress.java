@@ -42,11 +42,9 @@ public class RestaurantAddress extends AbstractBaseEntity implements Serializabl
     @Column(value = "RESTAURANT_ID")
     private UUID restaurantId;
 
-    @JsonIgnore
     @Column(value = "LATITUDE")
     private double latitude;
 
-    @JsonIgnore
     @Column(value = "LONGITUDE")
     private double longitude;
 
