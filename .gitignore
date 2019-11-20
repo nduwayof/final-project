@@ -25,3 +25,8 @@
 /deals-service/build/
 /deals-service/bin/
 /deals-service/gradle/
+
+/.settings
+.classpath
+.project
+.springBeans
