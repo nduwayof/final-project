@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: account-service2-deployment
+  labels:
+    app: account-service2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: account-service2
+  template:
+    metadata:
+      labels:
+        app: account-service2
+
+    spec:
+      containers:
+        - name: account-service2
+          image: caiohoffmann/account-service2:latest
+          ports:
+            - containerPort: 3000

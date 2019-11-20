@@ -1,0 +1,34 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ranking-service
+  labels:
+    app: ranking-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ranking-service
+    spec:
+      imagePullSecrets:
+      - name: registry-secret
+      containers:
+      - name: ranking-service
+        image: gcr.io/powerful-genre-259022/rank-test88:v1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8888
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: native
+        - name: VERSION
+          value: 'K8S_TIMESTAMP'
+        - name: CASSANDRA_PASSWORD
+          valueFrom:
+           secretKeyRef:
+            key: cassandra-password
+            name: mycass-cassandra1
+      nodeSelector:
+        beta.kubernetes.io/os: linux

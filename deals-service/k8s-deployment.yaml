@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deals-deployment
+  labels:
+    app: deals
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deals
+  template:
+    metadata:
+      labels:
+        app: deals
+
+    spec:
+      containers:
+        - name: deals
+          image: caiohoffmann/deals:latest
+          ports:
+            - containerPort: 8084

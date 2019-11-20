@@ -1,0 +1,18 @@
+GET http://localhost:3000/users
+###
+POST http://localhost:3000/users
+
+Content-Type: application/json
+{
+    "name":"Shiva",
+    "email":"wsbhaggan@mum.edu",
+    "password": "test",
+    "phone": "7869186297",
+    "address":[{
+        "country":"USA",
+        "street1":"1000 N 4th Street",
+        "street2":"9389 S 1st Street",
+        "zip":"52557",
+        "city":"Fairfield"
+    }],
+}
