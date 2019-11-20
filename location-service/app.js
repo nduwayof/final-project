@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const database = require("./db/database");
-const restaurant = require("./controller/locationcontroller");
+const location = require("./controller/locationcontroller");
 const listener = require('./listener');
 
 var app = express();
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/restaurant", restaurant);
+app.use("/locations", location);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

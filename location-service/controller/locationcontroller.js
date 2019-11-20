@@ -9,7 +9,7 @@ const kafka = new Kafka({
 
 const producer = kafka.producer();
 
-//Get all the restaurants
+//Get all the Locations
 router.get("/", async (req, res) => {
   try {
     const restaurant_retrieved = await Restaurant.find();
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-//Delete all the restaurants
+//Delete all the Locations
 router.delete("/delete", async (req, res) => {
   await Restaurant.deleteMany({});
 });
@@ -31,7 +31,7 @@ router.get("/all", async (req, res) => {
 });
 
 
-//For restaurant service to push to Kafka
+//For Location service to push to Kafka
 router.post("/", async (req, res) => {
   try {
     const restaurant = new Restaurant({
