@@ -1,23 +1,23 @@
 package com.example.demo.model;
 
 public class Notification {
-    private String userEmail;
+    private String userId;
     private String status;
 
     public Notification() {
         // TODO Auto-generated constructor stub
     }
 
-    public Notification(String userEmail, String status) {
+    public Notification(String userId, String status) {
         super();
-        this.userEmail = userEmail;
+        this.userId = userId;
         this.status = status;
     }
-    public String getUserEmail() {
-        return userEmail;
+    public String getUserId() {
+        return userId;
     }
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
     public String getStatus() {
         return status;

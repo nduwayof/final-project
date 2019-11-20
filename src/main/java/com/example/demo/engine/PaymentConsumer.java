@@ -31,7 +31,7 @@ public class PaymentConsumer {
             orderStatusRepository.save(orderStatus);
             Notification notification = new Notification();
             notification.setStatus(state.getDescription());
-            notification.setUserEmail(orderStatus.getUserid());
+            notification.setUserId(orderStatus.getUserid());
             producer = new Producer();
             producer.sendMessage(notification);
 
