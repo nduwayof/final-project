@@ -8,7 +8,7 @@ const kafka = new Kafka({
   const consumer = kafka.consumer({ groupId: "test-group" });
   const run = async () => {
     await consumer.connect();
-    await consumer.subscribe({ topic: "restaurant", fromBeginning: false });
+    await consumer.subscribe({ topic: "restaurants", fromBeginning: false });
     await consumer.run({
       eachMessage: async ({ topic, partition, message }) => {
         const restaurant_kafka = JSON.parse(message.value);
