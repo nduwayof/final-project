@@ -58,7 +58,6 @@ public class CassandraConfiguration extends AbstractCassandraConfiguration {
 
     @Override
     public CassandraClusterFactoryBean cluster() {
-        System.out.println(userName + " - " + userPassword);
         PlainTextAuthProvider authProvider = new PlainTextAuthProvider(userName, userPassword);
 
         CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
