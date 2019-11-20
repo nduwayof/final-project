@@ -1,9 +1,0 @@
-com/example/demo/DemoApplication.class
-com/example/demo/engine/SenderConfig.class
-com/example/demo/model/Ranking.class
-com/example/demo/model/Vote.class
-com/example/demo/controller/RankingController.class
-com/example/demo/engine/Sender.class
-com/example/demo/CassandraConfig.class
-com/example/demo/model/PayLoad.class
-com/example/demo/repository/RankingRepository.class
