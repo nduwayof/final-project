@@ -1,11 +1,9 @@
 package edu.mum.cs.restaurants;
 
-import edu.mum.cs.restaurants.models.Restaurant;
-import edu.mum.cs.restaurants.models.RestaurantAddress;
-import edu.mum.cs.restaurants.models.RestaurantMenu;
-import edu.mum.cs.restaurants.models.RestaurantSchedule;
+import edu.mum.cs.restaurants.models.*;
 
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +44,7 @@ class RestaurantTestData {
 
     List<RestaurantSchedule> restaurantSchedules(){
         List<RestaurantSchedule> restaurantSchedules = new ArrayList<>();
-        restaurantSchedules.add(new RestaurantSchedule());
+        restaurantSchedules.add(new RestaurantSchedule(EWeekDay.MONDAY, LocalTime.NOON, LocalTime.MIDNIGHT, restaurantId));
         return restaurantSchedules;
     }
 

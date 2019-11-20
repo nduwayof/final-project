@@ -1,9 +1,6 @@
 package edu.mum.cs.restaurants;
 
 import edu.mum.cs.restaurants.models.Restaurant;
-import edu.mum.cs.restaurants.models.RestaurantAddress;
-import edu.mum.cs.restaurants.models.RestaurantMenu;
-import edu.mum.cs.restaurants.models.RestaurantSchedule;
 import edu.mum.cs.restaurants.repositories.IRestaurantRepository;
 import edu.mum.cs.restaurants.services.IRestaurantQueryService;
 import edu.mum.cs.restaurants.services.IRestaurantService;
@@ -13,14 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -55,6 +46,23 @@ public class RestaurantsServiceApplicationTests {
                 new Restaurant("Every Body", "3124688754",data.restaurantAddresses(),data.restaurantMenus(), data.restaurantSchedules()))
                 .collect(Collectors.toList()));
         assertEquals(1, restaurantQueryService.findAllRestaurants().size());
+    }
+
+    @Test
+    public void poRestaurant(){
+        RestaurantTestData data = new RestaurantTestData();
+        Restaurant restaurant = new Restaurant("Indian Cafe", "6417018763", data.restaurantAddresses(), data.restaurantMenus(), data.restaurantSchedules());
+        when(restaurantRepository.save(restaurant)).thenReturn(restaurant);
+        assertEquals(restaurant, restaurantService.saveRestaurant(restaurant));
+    }
+
+    @Test
+    public void getRestaurantTest(){
+        RestaurantTestData data = new RestaurantTestData();
+        UUID restaurantId = UUID.randomUUID();
+        when(restaurantRepository.findById(restaurantId).get())
+                .thenReturn(new Restaurant("Indian Cafe", "6417018763", data.restaurantAddresses(), data.restaurantMenus(), data.restaurantSchedules()));
+        assertEquals(restaurantId, restaurantQueryService.findRestaurantById(restaurantId).getId());
     }
 
 }
