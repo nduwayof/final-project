@@ -1,0 +1,2 @@
+replicas: 1
+zookeeper:replicas: 1

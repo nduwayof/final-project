@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service-deployment
+  labels:
+    app: notification-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+      - name: notification-service
+        image: caiohoffmann/notification-service
+        ports:
+          - containerPort: 8080
+        env:
+          - name: USER_SERVICE
+            valueFrom:
+              configMapKeyRef:
+                name: notification-service-config
+                key: user-service
+          - name: API
+            valueFrom:
+              configMapKeyRef:
+                name: notification-service-config
+                key: user-api
+          - name: KAFKA_TOPIC
+            valueFrom:
+              configMapKeyRef:
+                name: notification-service-config
+                key: kafka-topic
+          - name: KAFKA_SERVER
+            valueFrom:
+              configMapKeyRef:
+                name: notification-service-config
+                key: kafka-server
+          - name: EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: notification-secrets
+                key: email
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: notification-secrets
+                key: password
+                  

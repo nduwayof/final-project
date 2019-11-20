@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: payment-service
-        image: ahmedheshamafify/payment-service
+        image: caiohoffmann/payment-service
         ports:
-          - containerPort: 8080
+          - containerPort: 8083
         env:
           - name: KAFKA_SERVER
             valueFrom:

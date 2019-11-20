@@ -1,0 +1,6 @@
+mongodbRootPassword: secret
+mongodbUsername: favsys
+mongodbPassword: secret
+mongodbDatabase: favorites
+replicaSet:
+  enabled: true

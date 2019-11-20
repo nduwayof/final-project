@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-status-deployment
+  labels:
+    app: order-status
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-status
+  template:
+    metadata:
+      labels:
+        app: order-status
+
+    spec:
+      containers:
+        - name: order-status
+          image: caiohoffmann/order-status:latest
+          ports:
+            - containerPort: 8087
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: native
+            - name: VERSION
+              value: 'K8S_TIMESTAMP'
