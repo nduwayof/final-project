@@ -119,10 +119,11 @@ k8s-deployment-delete-not:
 k8s-service-create-not:
 	kubectl apply -f notification-service/k8s-service.yaml
 	kubectl apply -f notification-service/k8s-config-map.yaml
+	kubectl apply -f notification-service/k8s-secrets.yaml
 k8s-service-delete-not:
 	kubectl delete -f notification-service/k8s-service.yaml
 	kubectl delete -f notification-service/k8s-config-map.yaml
-
+	kubectl delete -f notification-service/k8s-secrets.yaml
 #===================  Order  ===========================
 
 docker-build-ord: 

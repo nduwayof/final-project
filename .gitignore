@@ -10,7 +10,7 @@
 
 /OrderStatus/target/
 /RankingService/target/
-/location-service/target/
+/notification-service/target/
 /payment-service/target/
 
 /restaurants-service/build/
@@ -19,8 +19,11 @@
 /deals-service/build/
 /deals-service/bin/
 /deals-service/gradle/
+<<<<<<< HEAD
 
 /.settings
 .classpath
 .project
 .springBeans
+=======
+>>>>>>> 24734b9cf39acfd5b02557b55d3d8f76ab5f5db5
