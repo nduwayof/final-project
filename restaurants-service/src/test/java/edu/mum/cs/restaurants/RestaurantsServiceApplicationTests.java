@@ -17,7 +17,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -48,17 +50,9 @@ public class RestaurantsServiceApplicationTests {
 
     @Test
     public void getRestaurantsTest(){
-        List<RestaurantAddress> restaurantAddresses = new ArrayList<>();
-        restaurantAddresses.add(new RestaurantAddress());
-
-        List<RestaurantMenu> restaurantMenus = new ArrayList<>();
-        restaurantMenus.add(new RestaurantMenu());
-
-        List<RestaurantSchedule> restaurantSchedules = new ArrayList<>();
-        restaurantSchedules.add(new RestaurantSchedule());
-
+        RestaurantTestData data = new RestaurantTestData();
         when(restaurantRepository.findAll()).thenReturn(Stream.of(
-                new Restaurant("Every Body", "3124688754",restaurantAddresses,restaurantMenus, restaurantSchedules))
+                new Restaurant("Every Body", "3124688754",data.restaurantAddresses(),data.restaurantMenus(), data.restaurantSchedules()))
                 .collect(Collectors.toList()));
         assertEquals(1, restaurantQueryService.findAllRestaurants().size());
     }
