@@ -1,6 +1,6 @@
 const Restaurant = require("./model/restaurant");
 const { Kafka } = require("kafkajs");
-
+console.log('kafka.....');
 const kafka = new Kafka({
   clientId: "location-client",
   brokers: ["my-kafka:9092"]
@@ -8,7 +8,7 @@ const kafka = new Kafka({
 const consumer = kafka.consumer({ groupId: "test-group" });
 const run = async () => {
   await consumer.connect();
-  await consumer.subscribe({ topic: "restaurants" });
+  await consumer.subscribe({ topic: "restaurants", fromBeginning: true });
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       const restaurant_kafka = JSON.parse(message.value);
@@ -17,8 +17,8 @@ const run = async () => {
         const newRestaurant = new Restaurant({
           id: restaurant_kafka.id,
           name: restaurant_kafka.name,
-          address: restaurant_kafka.addresses,
-          menu: restaurant_kafka.menus
+          address: restaurant_kafka.address,
+          menu: restaurant_kafka.menu
         });
         await newRestaurant.save();
       } catch (err) {
