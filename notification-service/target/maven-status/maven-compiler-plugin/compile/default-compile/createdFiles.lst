@@ -1,6 +1,0 @@
-com/notification/config/NotificationConfiguration.class
-com/notification/model/Notification.class
-com/notification/SpringBootProducerApplication.class
-com/notification/config/KafkaConfiguration.class
-com/notification/service/kafkaConsumerService.class
-com/notification/controller/NotificationController.class
