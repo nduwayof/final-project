@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.UUID;
 
-@FeignClient(name = "restaurant-service", url = "http://restaurants-service:8091/restaurant/api/v1")
+@FeignClient(name = "restaurant-service", url = "http://restaurants-service:8091/restaurants/api/v1")
 public interface DealsFeignProxy {
 
     @GetMapping(value = "/menu/item/{restaurantMenuId}")
