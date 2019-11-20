@@ -1,9 +1,3 @@
-/Favorites/node_modules/
-/Favorites/bin/
-/Favorites/.vscode/
-/account-service/node_modules/
-/account-service/bin/
-/account-service/.vscode/
 /Order/node_modules/
 /Order/bin/
 /Order/.vscode
@@ -25,3 +19,11 @@
 /deals-service/build/
 /deals-service/bin/
 /deals-service/gradle/
+<<<<<<< HEAD
+
+/.settings
+.classpath
+.project
+.springBeans
+=======
+>>>>>>> 24734b9cf39acfd5b02557b55d3d8f76ab5f5db5

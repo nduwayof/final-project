@@ -7,7 +7,6 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.util.List;
 
-
 @Table
 public class Ranking {
     public String getResturant_id() {
@@ -27,18 +26,13 @@ public class Ranking {
         this.votes = votes;
     }
 
-
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
     }
-
-
 
     @PrimaryKey
     private @NonNull String resturant_id;
     @Column(value = "votes")
     private @NonNull List<Vote> votes;
-
-
 
 }

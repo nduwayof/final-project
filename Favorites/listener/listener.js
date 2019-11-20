@@ -8,7 +8,7 @@ const kafka = new Kafka({
 });
 
 const run = async _ => {
-    const consumer = kafka.consumer({ groupId: 'ea-eats' });
+    const consumer = kafka.consumer({ groupId: 'kafka-test' });
 
     // Consuming
     await consumer.connect()
@@ -17,7 +17,7 @@ const run = async _ => {
 
     await consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
-
+            console.log(topic + ' - ' + message.value);
             if (topic === 'user') {
                 const user = JSON.parse(message.value);
                 try {
@@ -34,11 +34,12 @@ const run = async _ => {
 
             } else if (topic === 'rank') {
                 const rest = JSON.parse(message.value);
-                const fav = await Favorites.findOne({ user: rank.userid, 'restaurants.ref': rest.rest_id });
+                console.dir(rest);
+                const fav = await Favorites.findOne({ user: rest.userid, 'restaurants.ref': rest.rest_id });
                 if (fav === null) {
                     const newFav = await Favorites.findOneAndUpdate({ user: rest.userid }, { $push: { restaurants: { ref: rest.rest_id, rating: rest.vote } } });
                 } else {
-                    const upFav = await Favorites.findOneAndUpdate({ user: rest.userid, 'restaurants.ref': rest.rest_id }, { $set: { 'restaurants.$.rating': rest.vote, 'restaurants.$.ref': rest.restaurant } }, { new: true, upsert: true }).exec();
+                    const upFav = await Favorites.findOneAndUpdate({ user: rest.userid, 'restaurants.ref': rest.rest_id }, { $set: { 'restaurants.$.rating': rest.vote, 'restaurants.$.ref': rest.rest_id } }, { new: true, upsert: true }).exec();
                 }
             }
         }
