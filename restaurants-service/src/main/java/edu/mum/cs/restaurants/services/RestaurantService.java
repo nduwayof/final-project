@@ -49,6 +49,8 @@ public class RestaurantService implements IRestaurantService {
         List<RestaurantAddress> restaurantAddresses = restaurant.getAddresses();
         if (restaurantAddresses != null && !restaurantAddresses.isEmpty()) {
             for (RestaurantAddress restaurantAddress : restaurantAddresses) {
+                restaurantAddress.getCoord()[0] = restaurantAddress.getLongitude();
+                restaurantAddress.getCoord()[1] = restaurantAddress.getLatitude();
                 restaurantAddress.setRestaurantId(restaurantObj.getId());
                 this.restaurantAddressRepository.save(restaurantAddress);
             }

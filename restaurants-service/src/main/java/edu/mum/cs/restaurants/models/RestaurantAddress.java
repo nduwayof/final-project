@@ -1,7 +1,9 @@
 package edu.mum.cs.restaurants.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import edu.mum.cs.restaurants.utilities.AbstractBaseEntity;
 import lombok.*;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.Column;
@@ -39,5 +41,16 @@ public class RestaurantAddress extends AbstractBaseEntity implements Serializabl
 
     @Column(value = "RESTAURANT_ID")
     private UUID restaurantId;
+
+    @JsonIgnore
+    @Column(value = "LATITUDE")
+    private double latitude;
+
+    @JsonIgnore
+    @Column(value = "LONGITUDE")
+    private double longitude;
+
+    @Transient
+    private double [] coord = new double[2];
 
 }
