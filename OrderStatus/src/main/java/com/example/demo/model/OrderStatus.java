@@ -9,18 +9,27 @@ import java.util.List;
 @Table
 public class OrderStatus {
     @PrimaryKey
-    private Integer order_id;
+    private String order_id;
+    private String  userid;
 
-    public Integer getOrder_id() {
+    public String getOrder_id() {
         return order_id;
     }
 
-    public OrderStatus(Integer order_id, List<State> states) {
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
+    public OrderStatus(String order_id, List<State> states) {
         this.order_id = order_id;
         this.states = states;
     }
 
-    public void setOrder_id(Integer order_id) {
+    public void setOrder_id(String order_id) {
         this.order_id = order_id;
     }
 
