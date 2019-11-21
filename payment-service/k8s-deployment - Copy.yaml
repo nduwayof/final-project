@@ -13,14 +13,13 @@ spec:
     metadata:
       labels:
         app: pay-service
-
     spec:
       containers:
-        - name: pay-service
-          image: caiohoffmann/pay-service:latest
-          ports:
-            - containerPort: 8093
-          env:
+      - name: pay-service
+        image: caiohoffmann/pay-service
+        ports:
+          - containerPort: 8093
+        env:
           - name: KAFKA_SERVER
             valueFrom:
               configMapKeyRef:
@@ -50,3 +49,5 @@ spec:
               secretKeyRef:
                 name: mongodb-secret
                 key: mongodb-password
+
+                  

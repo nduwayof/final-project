@@ -16,7 +16,7 @@ import com.payment.model.Payment;
 import com.payment.service.PaymentService;
 
 @RestController
-@EnableDiscoveryClient
+@RequestMapping(value = "/payments")
 public class PaymentController {
 
     @Autowired
