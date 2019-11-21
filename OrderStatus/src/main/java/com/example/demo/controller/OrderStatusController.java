@@ -15,29 +15,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class OrderStatusController
-{
+public class OrderStatusController {
 
-	private  Producer producer;
+	private Producer producer;
 
-	@Autowired
 	private OrderConsumer order_consumer;
-	@Autowired
+
 	private PaymentConsumer payment_consumer;
-
-
 
 	@Autowired
 	OrderStatusRepository orderStatusRepository;
 
-
 	@Autowired
-	OrderStatusController(Producer producer) {
+	OrderStatusController(Producer producer, OrderConsumer orderConsumer, PaymentConsumer paymentConsumer) {
 		this.producer = producer;
+		this.order_consumer = orderConsumer;
+		this.payment_consumer = paymentConsumer;
 	}
-
-
-
-
 
 }

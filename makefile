@@ -144,24 +144,22 @@ k8s-service-delete-ord:
 
 #===================  Order Status  ===========================
 
-build-ord-st:
-	mvn clean install -f OrderStatus/
-docker-build-ord-st: build-ord-st
-	docker build -t caiohoffmann/order-status:latest OrderStatus/.
+docker-build-ord-st: 
+	docker build -t caiohoffmann/ord-status:latest ord-status/. 
 
 docker-push-ord-st: docker-login docker-build-ord-st
-	docker push caiohoffmann/order-status:latest
+	docker push caiohoffmann/ord-status:latest
 
 k8s-deployment-create-ord-st: docker-push-ord-st
-	kubectl apply -f OrderStatus/k8s-deployment.yaml
+	kubectl apply -f ord-status/deployment.yaml
 k8s-deployment-delete-ord-st:
-	kubectl delete -f OrderStatus/k8s-deployment.yaml
+	kubectl delete -f ord-status/deployment.yaml
 
 
 k8s-service-create-ord-st:
-	kubectl apply -f OrderStatus/k8s-service.yaml
+	kubectl apply -f ord-status/service.yaml
 k8s-service-delete-ord-st:
-	kubectl delete -f OrderStatus/k8s-service.yaml
+	kubectl delete -f ord-status/service.yaml
 
 #===================  Ranking  ===========================
 

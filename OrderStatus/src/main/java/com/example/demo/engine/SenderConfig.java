@@ -1,5 +1,4 @@
 
-
 package com.example.demo.engine;
 
 import com.example.demo.model.Notification;
@@ -17,10 +16,8 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @Configuration
 @PropertySource("classpath:application.properties")
-
 public class SenderConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
@@ -41,6 +38,5 @@ public class SenderConfig {
     public KafkaTemplate<String, Notification> kafkaTemplate() {
         return new KafkaTemplate<String, Notification>(producerFactory());
     }
-
 
 }

@@ -5,4 +5,4 @@ metadata:
 data:
   mongodb-host: mongodb
   kafkaServer: my-kafka:9092
-  kafkaTopic: test
+  kafkaTopic: payment
