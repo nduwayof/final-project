@@ -13,11 +13,19 @@ public class Producer {
     private static final Logger logger = LoggerFactory.getLogger(Producer.class);
     private static final String TOPIC = "notification";
 
-    @Autowired
     private KafkaTemplate<String, Notification> kafkaTemplate;
 
+    public Producer() {
+    }
+
+    @Autowired
+    public Producer(KafkaTemplate<String, Notification> kafkaTemplate) {
+        kafkaTemplate = kafkaTemplate;
+    }
+
     public void sendMessage(Notification payLoad) {
-        logger.info(String.format("#### -> Producing message -> %s", payLoad));
+        // logger.info(String.format("#### -> Producing message -> %s", payLoad));
+        System.out.println(kafkaTemplate == null);
         this.kafkaTemplate.send(TOPIC, payLoad);
     }
 }

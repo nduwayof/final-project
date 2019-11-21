@@ -36,8 +36,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
+    const userEmail = req.body.email;
+    const exists = await User.findOne({ email: userEmail }).exec();
+    if (exists !== null) {
+      return next("User already exists");
+    }
     console.log('hey....');
     const user = new User({
       name: req.body.name,

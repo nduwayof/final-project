@@ -6,6 +6,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -26,22 +27,22 @@ import com.payment.repo.PaymentRepository;
 import com.payment.service.PaymentService;
 
 public class PaymentServiceTest {
-	
+
 	@Spy
 	@InjectMocks
 	PaymentService paymentService;
-	
+
 	@Mock
 	PaymentRepository paymentRepository;
-	
+
 	@Mock
 	Payment payment;
-	
+
 	@BeforeEach
-	public void init(){
+	public void init() {
 		MockitoAnnotations.initMocks(this);
 	}
-	
+
 	@Test
 	public void savePaymentFalse() {
 		when(paymentRepository.save(payment)).thenReturn(payment);
@@ -49,10 +50,10 @@ public class PaymentServiceTest {
 		assertFalse(paymentService.savePayment(payment));
 		System.out.println();
 	}
-	
+
 	@Test
 	public void savePaymentTrue() {
-		Payment payment = new Payment("1", new CreditCardInfo("123",12,2022), LocalDate.now());
+		Payment payment = new Payment("1", new CreditCardInfo("123", 12, 2022), new Date());
 		when(paymentRepository.save(payment)).thenReturn(payment);
 		doNothing().when(paymentService).sendMessage(payment);
 		assertTrue(paymentService.savePayment(payment));

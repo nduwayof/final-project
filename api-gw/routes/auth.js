@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const axios = require('axios');
 
 const User = require('../models/user');
 
@@ -35,7 +36,8 @@ route.post('/login', async (req, res, next) => {
 route.post('/signin', async (req, res, next) => {
     const url = process.env.userServ;
     try {
-        const ret = await axios.post(url + '/user', req.body);
+        const ret = await axios.post('http://' + url + ':' + process.env.userServPort + '/users', req.body);
+        res.json(ret.data, ret.status);
         res.json(ret);
     } catch (err) {
         next(err);

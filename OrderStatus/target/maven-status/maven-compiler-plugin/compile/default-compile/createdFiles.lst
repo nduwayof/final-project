@@ -4,10 +4,10 @@ com\example\demo\DemoApplication.class
 com\example\demo\CassandraConfig.class
 com\example\demo\engine\PaymentConsumer.class
 com\example\demo\engine\ReceiverConfig.class
+com\payment\model\Payment.class
 com\example\demo\model\OrderItem.class
 com\example\demo\repository\OrderStatusRepository.class
 com\example\demo\engine\SenderConfig.class
-com\example\demo\model\Payment.class
 com\example\demo\model\OrderStatus.class
 com\example\demo\model\Notification.class
 com\example\demo\model\Order.class

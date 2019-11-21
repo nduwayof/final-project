@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-mongoose.connect('mongodb+srv://favsys:SWKn6983lCHZKGFo@fav-soyyk.mongodb.net/auth?retryWrites=true&w=majority', {
+mongoose.connect('mongodb://mongodb:27017/auth', {
   useUnifiedTopology: true,
   useCreateIndex: true,
   useNewUrlParser: true,

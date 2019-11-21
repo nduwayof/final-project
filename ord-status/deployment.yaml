@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ord-status-deployment
+  labels:
+    app: ord-status
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ord-status
+  template:
+    metadata:
+      labels:
+        app: ord-status
+
+    spec:
+      containers:
+        - name: ord-status
+          image: caiohoffmann/ord-status:latest
+          ports:
+            - containerPort: 3001
