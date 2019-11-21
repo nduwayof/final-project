@@ -79,9 +79,8 @@ public class RestaurantService implements IRestaurantService {
     }
 
     @Override
-    public Restaurant deleteRestaurant(@NotNull final UUID id) {
-        Restaurant restaurant = this.restaurantRepository.findById(id).orElse(null);
-        if(restaurant != null) this.restaurantRepository.delete(restaurant);
+    public Restaurant deleteRestaurant(@NotNull final Restaurant restaurant) {
+        this.restaurantRepository.delete(restaurant);
         return restaurant;
     }
 

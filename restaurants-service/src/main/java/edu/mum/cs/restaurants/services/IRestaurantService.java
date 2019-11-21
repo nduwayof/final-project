@@ -30,12 +30,13 @@ public interface IRestaurantService {
      */
     Restaurant createRestaurant(@NotNull final Restaurant  restaurant);
 
+
     /**
      * Delete restaurant restaurant.
      *
-     * @param id the id
+     * @param restaurant the restaurant
      *
      * @return the restaurant
      */
-    Restaurant deleteRestaurant(UUID id);
+    Restaurant deleteRestaurant(@NotNull final Restaurant restaurant);
 }

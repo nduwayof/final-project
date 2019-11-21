@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * The type Restaurants service application tests.
@@ -57,12 +57,11 @@ public class RestaurantsServiceApplicationTests {
     }
 
     @Test
-    public void getRestaurantTest(){
+    public void deleteRestaurant(){
         RestaurantTestData data = new RestaurantTestData();
-        UUID restaurantId = UUID.randomUUID();
-        when(restaurantRepository.findById(restaurantId).get())
-                .thenReturn(new Restaurant("Indian Cafe", "6417018763", data.restaurantAddresses(), data.restaurantMenus(), data.restaurantSchedules()));
-        assertEquals(restaurantId, restaurantQueryService.findRestaurantById(restaurantId).getId());
+        Restaurant restaurant = new Restaurant("Indian Cafe", "6417018763", data.restaurantAddresses(), data.restaurantMenus(), data.restaurantSchedules());
+        restaurantService.deleteRestaurant(restaurant);
+        verify(restaurantRepository, times(1)).delete(restaurant);
     }
 
 }
