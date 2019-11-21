@@ -1,0 +1,114 @@
+<div class="card card-block login-card">
+  <h3 class="form-label">Register User</h3>
+  <div class="form-group">
+    <form name="registerForm" [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Full name" name="name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="email" name="email" formControlName="email">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="password" formControlName="password" name="password" type="password">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Retype Password" formControlName="password2" name="password2" type="password">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="phone" formControlName="phone" name="phone" type="number">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Country" formControlName="country" name="country">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Address Street 1" formControlName="street1" name="street1">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Address Street 2" formControlName="street2" name="street2">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Zip" formControlName="zip" name="zip" type="number">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="City" formControlName="city" name="city">
+        </mat-form-field>
+      </div>
+
+
+      <button class="btn btn-lg btn-primary">Login</button>
+      <a href="" class="btn btn-link">Register Now. →</a>
+    </form>
+  </div>
+</div>
+
+
+<!-- <form name="registerForm" [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+  <div class="row row-space">
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Full name" name="name" formControlName="name" >
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="email" name="email" formControlName="email" >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row row-space">
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="password" formControlName="password" name="password" type="password" >
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Retype Password" formControlName="password2" name="password2" type="password" >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row row-space">
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="phone" formControlName="phone" name="phone" type="number" >
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Country" formControlName="country" name="country" >
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Address Street 1" formControlName="street1" name="street1" >
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Address Street 2" formControlName="street2" name="street2" >
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Zip" formControlName="zip" name="zip" type="number" >
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="City" formControlName="city" name="city" >
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="p-t-15">
+    <button class="btn btn--radius-2 btn--blue">Register</button>
+  </div>
+</form> -->
