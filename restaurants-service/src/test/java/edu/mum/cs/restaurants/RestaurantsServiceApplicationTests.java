@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -49,7 +48,7 @@ public class RestaurantsServiceApplicationTests {
     }
 
     @Test
-    public void poRestaurant(){
+    public void postRestaurantTest(){
         RestaurantTestData data = new RestaurantTestData();
         Restaurant restaurant = new Restaurant("Indian Cafe", "6417018763", data.restaurantAddresses(), data.restaurantMenus(), data.restaurantSchedules());
         when(restaurantRepository.save(restaurant)).thenReturn(restaurant);
@@ -57,7 +56,7 @@ public class RestaurantsServiceApplicationTests {
     }
 
     @Test
-    public void deleteRestaurant(){
+    public void deleteRestaurantTest(){
         RestaurantTestData data = new RestaurantTestData();
         Restaurant restaurant = new Restaurant("Indian Cafe", "6417018763", data.restaurantAddresses(), data.restaurantMenus(), data.restaurantSchedules());
         restaurantService.deleteRestaurant(restaurant);
