@@ -1,7 +1,7 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: payment-service-config
+  name: pay-service-config
 data:
   mongodb-host: mongodb
   kafkaServer: my-kafka:9092

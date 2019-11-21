@@ -189,10 +189,10 @@ k8s-service-delete-rk:
 build-pay:
 	mvn clean install -f payment-service/
 docker-build-pay: build-pay
-	docker build -t caiohoffmann/payment-service:latest payment-service/.
+	docker build -t caiohoffmann/pay-service:latest payment-service/.
 
 docker-push-pay: docker-login docker-build-pay
-	docker push caiohoffmann/payment-service:latest
+	docker push caiohoffmann/pay-service:latest
 
 k8s-deployment-create-pay: docker-push-pay
 	kubectl apply -f payment-service/k8s-deployment.yaml
@@ -252,6 +252,8 @@ k8s-reset : k8s-deployment-delete k8s-service-delete  k8s-service-create  k8s-de
 helm-create: helm-mongo-create helm-cassandra-create helm-kafka-create helm-redis-create
 helm-delete: helm-mongo-delete helm-cassandra-delete helm-kafka-delete helm-redis-delete
 
+server-up: helm-create k8s-service-create k8s-deployment-create
+server-down: helm-delete k8s-service-delete k8s-deployment-delete
 
 ########		MongoDB Intallation 				####
 helm-mongo-create:

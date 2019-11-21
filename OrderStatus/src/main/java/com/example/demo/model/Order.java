@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Order {
     private Date date;
     private List<OrderItem> items;
     private int deliveryTime;
-    private int total;
+    private BigDecimal total;
 
     public String getRestaurant() {
         return restaurant;
@@ -61,11 +62,11 @@ public class Order {
         this.deliveryTime = deliveryTime;
     }
 
-    public int getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 }

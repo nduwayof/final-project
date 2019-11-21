@@ -18,17 +18,25 @@ import java.util.Date;
 public class OrderConsumer {
     @Autowired
     OrderStatusRepository orderStatusRepository;
-    private  Producer producer;
+    private Producer producer;
 
+    OrderConsumer() {
+
+    }
+
+    @Autowired
+    OrderConsumer(Producer producer) {
+        this.producer = producer;
+    }
 
     private final Logger logger = LoggerFactory.getLogger(OrderConsumer.class);
 
-    @KafkaListener(topics = "order", groupId = "group_id",containerFactory = "kafkaListenerContainerFactory2")
+    @KafkaListener(topics = "order", groupId = "group_id", containerFactory = "kafkaListenerContainerFactory2")
     public void consume(Order message) throws IOException, ParseException {
 
-        OrderStatus orderStatus = new OrderStatus(message.get_id(),new ArrayList<>());
+        OrderStatus orderStatus = new OrderStatus(message.get_id(), new ArrayList<>());
         State state = new State();
-        Date date1=new Date();
+        Date date1 = new Date();
         state.setDate(date1);
         state.setDescription("The order placed successfully");
         orderStatus.getStates().add(state);
@@ -37,14 +45,9 @@ public class OrderConsumer {
         Notification notification = new Notification();
         notification.setStatus(state.getDescription());
         notification.setUserId(message.getUser());
-        producer = new Producer();
         producer.sendMessage(notification);
-
-
-
 
         logger.info(String.format("#### -> Consumed message order Consumer -> %s", message));
     }
-
 
 }

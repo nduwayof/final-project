@@ -8,11 +8,11 @@ const Orders = new Schema({
     date: Date,
     items: [{
         name: String,
-        value: mongoose.Types.Decimal128,
+        value: Number,
         preparationTime: Number
     }],
     deliveryTime: Number,
-    total: mongoose.Types.Decimal128
+    total: Number
 });
 
 module.exports = mongoose.model('order', Orders); 

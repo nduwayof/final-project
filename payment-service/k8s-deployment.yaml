@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: payment-service-deployment
+  name: pay-service-deployment
   labels:
-    app: payment-service
+    app: pay-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: payment-service
+      app: pay-service
   template:
     metadata:
       labels:
-        app: payment-service
+        app: pay-service
     spec:
       containers:
-      - name: payment-service
-        image: caiohoffmann/payment-service
+      - name: pay-service
+        image: caiohoffmann/pay-service
         ports:
           - containerPort: 8093
         env:
@@ -24,20 +24,20 @@ spec:
             valueFrom:
               configMapKeyRef:
               # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
-                name: payment-service-config
+                name: pay-service-config
               # Specify the key associated with the value
                 key: kafkaServer
           - name: KAFKA_TOPIC
             valueFrom:
               configMapKeyRef:
               # The ConfigMap containing the value you want to assign to SPECIAL_LEVEL_KEY
-                name: payment-service-config
+                name: pay-service-config
               # Specify the key associated with the value
                 key: kafkaTopic
           - name: MONGODB_HOST
             valueFrom:
               configMapKeyRef:
-                name: payment-service-config
+                name: pay-service-config
                 key: mongodb-host
           - name: MONGODB_USER_NAME
             valueFrom:

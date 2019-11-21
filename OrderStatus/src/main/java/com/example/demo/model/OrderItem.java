@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.math.BigDecimal;
+
 public class OrderItem {
     private String name;
 
@@ -11,11 +13,11 @@ public class OrderItem {
         this.name = name;
     }
 
-    public double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 
@@ -27,6 +29,6 @@ public class OrderItem {
         this.preparationTime = preparationTime;
     }
 
-    private  double value;
+    private  BigDecimal value;
     private  int preparationTime;
 }

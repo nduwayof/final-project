@@ -46,7 +46,7 @@ spec:
             - name: rankingServPort
               value: '8099'  
             - name: paymentServ
-              value: payment-service 
+              value: pay-service 
             - name: paymentServPort
               value: '8093'   
             - name: dealsServ

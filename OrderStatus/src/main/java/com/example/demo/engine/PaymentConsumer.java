@@ -13,16 +13,23 @@ import java.util.Date;
 
 public class PaymentConsumer {
     private final Logger logger = LoggerFactory.getLogger(OrderConsumer.class);
-    private  Producer producer;
+    private Producer producer;
     @Autowired
     OrderStatusRepository orderStatusRepository;
 
+    PaymentConsumer() {
 
-    @KafkaListener(topics = "payment", groupId = "group_id",containerFactory = "kafkaListenerContainerFactory")
+    }
+
+    @Autowired
+    PaymentConsumer(Producer producer) {
+        this.producer = producer;
+    }
+
+    @KafkaListener(topics = "payment", groupId = "group_id", containerFactory = "kafkaListenerContainerFactory")
     public void consume(Payment message) throws IOException, ParseException {
         producer = new Producer();
-        if(message != null)
-        {
+        if (message != null) {
             OrderStatus orderStatus = orderStatusRepository.findById(message.getOrderId()).get();
             State state = new State();
             state.setDate(new Date());
@@ -32,11 +39,9 @@ public class PaymentConsumer {
             Notification notification = new Notification();
             notification.setStatus(state.getDescription());
             notification.setUserId(orderStatus.getUserid());
-            producer = new Producer();
             producer.sendMessage(notification);
 
         }
-
 
         logger.info(String.format("#### -> Consumed message Payment Consumer-> %s", message));
     }
